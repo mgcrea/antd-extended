@@ -1,0 +1,47 @@
+/*
+  &.ant-checkbox-group-flex-3 {
+    display: flex;
+    flex-wrap: wrap;
+    .ant-checkbox-button-wrapper {
+      flex: 0 0 calc(33.33% - 12px);
+    }
+  }
+  &.ant-checkbox-group-flex-4 {
+    display: flex;
+    flex-wrap: wrap;
+    .ant-checkbox-button-wrapper {
+      flex: 0 0 calc(25% - 12px);
+    }
+  }
+  &.ant-checkbox-group-flex-5 {
+    display: flex;
+    flex-wrap: wrap;
+    .ant-checkbox-button-wrapper {
+      flex: 0 0 calc(20% - 12px);
+    }
+  }
+  &.ant-checkbox-group-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(2, auto);
+  }
+  &.ant-checkbox-group-vertical {
+    .ant-checkbox-wrapper {
+      margin-left: 0px;
+    }
+    .ant-checkbox-button-wrapper {
+      &:not(:first-of-type) {
+        margin-top: 10px;
+      }
+    }
+  }
+*/
+
+.ant-checkbox-group {
+  &-vertical {
+    flex-direction: column;
+    > .ant-checkbox-wrapper:not(:last-of-type) {
+      margin-bottom: 0.5em;
+    }
+  }
+}

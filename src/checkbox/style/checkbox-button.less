@@ -1,0 +1,42 @@
+// @source https://github.com/ant-design/ant-design/blob/master/components/radio/style
+// @source https://github.com/ant-design/ant-design/tree/master/components/checkbox/style
+
+@import (reference) 'antd/lib/button/style';
+@import (reference) 'antd/lib/checkbox/style';
+@import (reference) '../../style/themes/default';
+
+@checkbox-button-prefix-cls: ~'@{ant-prefix}-checkbox-button';
+
+.@{checkbox-button-prefix-cls}-wrapper {
+  .btn;
+  .btn-default;
+  // @NOTE use flex for vertical align
+  display: flex;
+  align-items: center;
+  > .ant-checkbox {
+    position: inherit;
+    top: 0;
+  }
+
+  &-checked {
+    border-color: red;
+  }
+}
+
+@checkbox-group-prefix-cls: ~'@{ant-prefix}-checkbox-group';
+
+.@{checkbox-group-prefix-cls} {
+  .btn-group(ant-checkbox-button-wrapper);
+
+  &-xs .@{checkbox-button-prefix-cls}-wrapper {
+    .button-size(@btn-height-xs; @btn-padding-horizontal-xs; @btn-font-size-xs; @border-radius-base);
+  }
+
+  &-xl .@{checkbox-button-prefix-cls}-wrapper {
+    .button-size(@btn-height-xl; @btn-padding-horizontal-xl; @btn-font-size-xl; @border-radius-base);
+  }
+
+  &-xxl .@{checkbox-button-prefix-cls}-wrapper {
+    .button-size(@btn-height-xxl; @btn-padding-horizontal-xxl; @btn-font-size-xxl; @border-radius-base);
+  }
+}
