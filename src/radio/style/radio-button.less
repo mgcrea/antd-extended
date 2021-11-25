@@ -1,0 +1,43 @@
+// @source https://github.com/ant-design/ant-design/blob/master/components/radio/style
+
+@import (reference) 'antd/lib/radio/style';
+@import (reference) '../../style/themes/default';
+
+.@{radio-prefix-cls}-button-wrapper {
+  user-select: none;
+  transition: color @transition-duration, background @transition-duration, border-color @transition-duration,
+    box-shadow @transition-duration;
+
+  .@{radio-group-prefix-cls}-xs & {
+    height: @input-height-xs;
+    padding: 0 @control-padding-horizontal-sm - 2px;
+    line-height: @input-height-xs - 2px;
+  }
+
+  .@{radio-group-prefix-cls}-xl & {
+    height: @input-height-xl;
+    font-size: @font-size-xl;
+    line-height: @input-height-xl - 2px;
+  }
+
+  .@{radio-group-prefix-cls}-xxl & {
+    height: @input-height-xxl;
+    font-size: @font-size-xxl;
+    line-height: @input-height-xxl - 2px;
+  }
+
+  .ant-radio-button-icons {
+    margin-right: 5px;
+  }
+  .ant-radio-button-icon-checked {
+    display: none;
+  }
+  &-checked {
+    .ant-radio-button-icon {
+      display: none;
+    }
+    .ant-radio-button-icon-checked {
+      display: inherit;
+    }
+  }
+}
