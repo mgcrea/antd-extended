@@ -1,11 +1,38 @@
-# create-vite-app
+# antd-extended
+
+## Features
+
+- Adds several new sizes `x-small`, `x-large` and `xx-large` to most components
+- Adds a new `secondary` type for buttons
+- Adds `utc` mode to date-related pickers
+
+## Install
 
 ```sh
-npm init vite@latest my-app -- --template react-ts
+npm install @mgcrea/antd-extended
 ```
 
-## eslint
+## Quickstart
 
-```sh
-npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks
+```tsx
+import React from 'react';
+import {Button} from '@mgcrea/antd-extended';
+
+function App() {
+  const {
+    register,
+    handleSubmit,
+    formState: {errors},
+  } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  return (
+    <div>
+      <Button size="x-small">X-Small</Button>
+      <Button type="secondary" size="x-large">
+        X-Large
+      </Button>
+    </div>
+  );
+}
 ```

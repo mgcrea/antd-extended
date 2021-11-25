@@ -1,0 +1,86 @@
+// @source https://github.com/ant-design/ant-design/blob/master/components/button/style
+
+@import (reference) 'antd/lib/button/style';
+@import (reference) '../../style/themes/default';
+@import '../../style/themes/variables';
+
+
+.@{btn-prefix-cls} {
+  transition: all 0.15s;
+
+  &.@{btn-prefix-cls}-xs {
+    .button-size(@btn-height-xs; @btn-padding-horizontal-xs; @btn-font-size-xs; @border-radius-base);
+  }
+
+  &.@{btn-prefix-cls}-sm {
+    .button-size(@btn-height-sm; @btn-padding-horizontal-sm; @btn-font-size-sm; @border-radius-base);
+  }
+
+  &.@{btn-prefix-cls}-xl {
+    .button-size(@btn-height-xl; @btn-padding-horizontal-xl; @btn-font-size-xl; @border-radius-base);
+  }
+
+  &.@{btn-prefix-cls}-xxl {
+    .button-size(@btn-height-xxl; @btn-padding-horizontal-xxl; @btn-font-size-xxl; @border-radius-base);
+  }
+}
+
+// .ant-btn-secondary {
+//   color: var(--grey700);
+//   background-color: var(--grey300);
+//   border-color: var(--grey300);
+//   &:hover {
+//     background-color: var(--grey400);
+//     border-color: var(--grey400);
+//   }
+// }
+
+.ant-btn-secondary {
+    .button-variant-other(var(--grey700); var(--grey300); var(--grey300));
+    &:hover,
+    &:focus,
+    &:active {
+      text-decoration: none;
+      color: var(--grey800);
+      background: var(--grey400);
+      border-color: var(--grey400);
+    }
+
+    // .@{btn-prefix-cls}-group &:not(:first-child):not(:last-child) {
+    //   border-right-color: @btn-group-border;
+    //   border-left-color: @btn-group-border;
+
+    //   &:disabled {
+    //     border-color: @btn-default-border;
+    //   }
+    // }
+
+    // .@{btn-prefix-cls}-group &:first-child {
+    //   &:not(:last-child) {
+    //     border-right-color: @btn-group-border;
+
+    //     &[disabled] {
+    //       border-right-color: @btn-default-border;
+    //     }
+    //   }
+    // }
+
+    // .@{btn-prefix-cls}-group &:last-child:not(:first-child),
+    // .@{btn-prefix-cls}-group & + & {
+    //   border-left-color: @btn-group-border;
+
+    //   &[disabled] {
+    //     border-left-color: @btn-default-border;
+    //   }
+    // }
+}
+
+// .ant-btn {
+//   // border-color: var(--blue200);
+//   box-shadow: inset 0 -2px 0 var(--blue200);
+//   &:hover {
+//     /* color: var(--blue700); */
+//     box-shadow: inset 0 -@height-base 0 var(--blue200);
+//     /* background: var(--blue300); */
+//   }
+// }
