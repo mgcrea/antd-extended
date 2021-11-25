@@ -1,0 +1,40 @@
+// @source https://github.com/ant-design/ant-design/blob/master/components/input/style
+
+@import (reference) 'antd/lib/input/style';
+@import (reference) '../../style/themes/default';
+
+.@{ant-prefix}-input {
+  transition: all @transition-duration;
+
+  &-xs {
+    padding: @input-padding-vertical-xs @input-padding-horizontal-xs;
+    font-size: @font-size-xs;
+    > .@{ant-prefix}-input,
+    > .@{ant-prefix}-input-suffix .anticon {
+      font-size: @font-size-xs;
+    }
+  }
+
+  &-xl {
+    padding: @input-padding-vertical-xl @input-padding-horizontal-xl;
+    font-size: @font-size-xl;
+    > .@{ant-prefix}-input,
+    > .@{ant-prefix}-input-suffix .anticon {
+      font-size: @font-size-xl;
+    }
+  }
+
+  &-xxl {
+    padding: @input-padding-vertical-xxl @input-padding-horizontal-xxl;
+    font-size: @font-size-xxl;
+    > .@{ant-prefix}-input,
+    > .@{ant-prefix}-input-suffix .anticon {
+      font-size: @font-size-xxl;
+    }
+  }
+
+  &[disabled] {
+    color: var(--grey600);
+    background-color: var(--grey200);
+  }
+}

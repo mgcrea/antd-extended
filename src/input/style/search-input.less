@@ -1,0 +1,54 @@
+// @source https://github.com/ant-design/ant-design/blob/master/components/input/style
+@import (reference) 'antd/lib/input/style';
+@import (reference) '../../style/themes/default';
+
+.@{ant-prefix}-input-search {
+  transition: all @transition-duration;
+
+  // &-xs {
+  //   padding: @input-padding-vertical-xs @input-padding-horizontal-xs;
+  //   > .@{ant-prefix}-input,
+  //   > .@{ant-prefix}-input-suffix .anticon {
+  //     font-size: @font-size-xs;
+  //   }
+  // }
+
+  &-xs {
+    .@{ant-prefix}-input-affix-wrapper {
+      padding: @input-padding-vertical-xs @input-padding-horizontal-xs;
+      > .@{ant-prefix}-input {
+        font-size: @font-size-xs;
+      }
+    }
+    .@{ant-prefix}-input-group-addon > .@{ant-prefix}-btn {
+      height: @input-height-xs;
+      padding: @input-padding-vertical-xs @input-padding-horizontal-xs;
+      width: 48px;
+      > .anticon {
+        font-size: @font-size-xs;
+      }
+    }
+  }
+
+  &-xl {
+    .@{ant-prefix}-input-affix-wrapper {
+      padding: @input-padding-vertical-xl @input-padding-horizontal-xl;
+      > .@{ant-prefix}-input {
+        font-size: @font-size-xl;
+      }
+    }
+    .@{ant-prefix}-input-group-addon > .@{ant-prefix}-btn {
+      height: @input-height-xl;
+      padding: @input-padding-vertical-xl @input-padding-horizontal-xl;
+      width: 48px;
+      > .anticon {
+        font-size: @font-size-xl;
+      }
+    }
+  }
+
+  &[disabled] {
+    color: var(--grey600);
+    background-color: var(--grey200);
+  }
+}
