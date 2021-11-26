@@ -1,16 +1,10 @@
 {
   "name": "@mgcrea/antd-extended",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "license": "MIT",
   "main": "./lib/umd/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./lib/esm/index.js",
-      "require": "./lib/umd/index.js"
-    }
-  },
   "scripts": {
     "start": "start-storybook -p 6006",
     "start:vite": "vite",
