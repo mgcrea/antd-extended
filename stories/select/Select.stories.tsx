@@ -4,10 +4,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React from 'react';
 import 'src/style/reset.css';
-import {storybookSizeArgTypes, storybookSizeOptions, StoryContainer} from 'src/utils';
-import {Select} from './Select';
-import {SelectOption} from './SelectOption';
-// import {useArgs} from '@storybook/api';
+import {Select, SelectOption} from './../../src/select';
+import {sizeTemplate, storybookSizeArgTypes} from './../utils';
 
 const options = [
   {label: 'Jack', value: 'jack'},
@@ -37,35 +35,19 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-const DefaultTemplate: ComponentStory<typeof Select> = (props) => {
-  // const [args, updateArgs, resetArgs] = useArgs();
-  return <Select options={options} {...props}></Select>;
-};
+const DefaultTemplate: ComponentStory<typeof Select> = (props) => <Select options={options} {...props}></Select>;
 export const Default = DefaultTemplate.bind({});
 
 const InlineTemplate: ComponentStory<typeof Select> = (props) => (
-  <Select defaultValue="lucy" {...props}>
-    {options.map(({label, value, ...otherProps}) => {
-      return (
-        <SelectOption key={value} value={value} {...otherProps}>
-          {label}
-        </SelectOption>
-      );
-    })}
+  <Select {...props}>
+    {options.map(({label, value, ...otherProps}) => (
+      <SelectOption key={value} value={value} {...otherProps}>
+        {label}
+      </SelectOption>
+    ))}
   </Select>
 );
 export const Inline = InlineTemplate.bind({});
 
-const SizeTemplate: ComponentStory<typeof Select> = (props, context) => (
-  <StoryContainer>
-    {storybookSizeOptions.map((size) => {
-      return (
-        <>
-          <span>{size}</span>
-          {DefaultTemplate({...props, size}, context)}
-        </>
-      );
-    })}
-  </StoryContainer>
-);
+const SizeTemplate = sizeTemplate(DefaultTemplate);
 export const Sizes = SizeTemplate.bind({});

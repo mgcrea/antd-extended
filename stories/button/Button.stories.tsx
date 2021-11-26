@@ -2,8 +2,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/button/style/index.less';
 import React, {FunctionComponent} from 'react';
 import 'src/style/reset.css';
-import {storybookSizeArgTypes, storybookSizeOptions, StoryContainer} from 'src/utils';
-import {Button, ButtonProps} from './Button';
+import {sizeTemplate, storybookSizeArgTypes, storybookSizeOptions, StoryContainer} from '../utils';
+import {Button, ButtonProps} from './../../src/Button';
 
 export default {
   title: 'ant-design/Button',
@@ -50,16 +50,5 @@ const TypeTemplate: ComponentStory<typeof Button> = (props) => (
 );
 export const ButtonTypes = TypeTemplate.bind({});
 
-const SizeTemplate: ComponentStory<typeof Button> = ({children, ...props}: ButtonProps, context) => (
-  <StoryContainer>
-    {storybookSizeOptions.map((size) => {
-      return (
-        <>
-          <span>{size}</span>
-          {DefaultTemplate({...props, size, children: children || size}, context)}
-        </>
-      );
-    })}
-  </StoryContainer>
-);
+const SizeTemplate = sizeTemplate(DefaultTemplate);
 export const Sizes = SizeTemplate.bind({});

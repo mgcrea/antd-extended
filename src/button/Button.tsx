@@ -2,7 +2,7 @@
 
 import AntDesignButton, {ButtonProps as AntDesignButtonProps} from 'antd/lib/button';
 import React, {FunctionComponent} from 'react';
-import {applySizeProps, classNames, SizeType} from './../utils';
+import {applySizeProps, SizeType, classNames} from './../utils';
 import './style/button.less';
 
 type ButtonTypes = AntDesignButtonProps['type'] | 'secondary';

@@ -8,6 +8,4 @@ export * from './radio';
 export * from './select';
 export * from './tag';
 export * from './time-picker';
-export * from './timeline';
-export * from './typography';
 export * from './utils';

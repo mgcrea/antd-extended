@@ -2,10 +2,7 @@ const vitePluginImp = require('vite-plugin-imp');
 const path = require('path');
 
 module.exports = {
-  stories: [
-    '../src/{avatar,button,checkbox,date-picker,input,input-number,radio}/*.stories.mdx',
-    '../src/{avatar,button,checkbox,date-picker,input,input-number,radio}/*.stories.@(js|jsx|ts|tsx)',
-  ],
+  stories: ['../{src,stories}/**/*.stories.mdx', '../{src,stories}/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/react',
   core: {

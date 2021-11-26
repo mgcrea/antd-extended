@@ -7,7 +7,7 @@ import React, {FunctionComponent, useContext} from 'react';
 import {applySizeClassNames, SizeType} from './../utils';
 import './style/search-input.less';
 
-export type TextAreaProps = AntDesignTextAreaProps & {
+export type TextAreaProps = Omit<AntDesignTextAreaProps, 'size'> & {
   size?: SizeType;
 };
 

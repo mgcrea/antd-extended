@@ -7,11 +7,18 @@ import {applySizeProps, SizeType} from './../utils';
 import './style/search-input.less';
 
 export type SearchProps = Omit<AntDesignSearchProps, 'size'> & {
-  wait?: number;
+  debounce?: number;
   size?: SizeType;
 };
 
-export const Search: FunctionComponent<SearchProps> = ({wait = 400, size, className, onSearch, ...otherProps}) => {
+export const Search: FunctionComponent<SearchProps> = ({
+  debounce = 400,
+  size,
+  className,
+  onSearch,
+  onChange,
+  ...otherProps
+}) => {
   const handleSearch = useCallback(
     (searchValue) => {
       console.warn('handleSearch', searchValue);
@@ -22,14 +29,20 @@ export const Search: FunctionComponent<SearchProps> = ({wait = 400, size, classN
     [onSearch],
   );
 
-  const debouncedSearch = useDebounce(handleSearch, wait, {leading: false});
+  const debouncedSearch = useDebounce(handleSearch, debounce);
 
   const handleChange = useCallback<NonNullable<SearchProps['onChange']>>(
-    (ev) => {
-      const {value} = ev.target;
-      wait ? debouncedSearch(value) : handleSearch(value);
+    (event, ...otherArgs) => {
+      if (onChange) {
+        onChange(event, ...otherArgs);
+      }
+      if (event.defaultPrevented) {
+        return;
+      }
+      const {value} = event.target;
+      debounce ? debouncedSearch(value) : handleSearch(value);
     },
-    [wait, handleSearch, debouncedSearch],
+    [debounce, handleSearch, onChange, debouncedSearch],
   );
 
   return (

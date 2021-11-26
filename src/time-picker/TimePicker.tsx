@@ -1,5 +1,5 @@
-// @docs https://ant.design/components/date-picker
-// @source https://github.com/ant-design/ant-design/tree/master/components/date-picker
+// @docs https://ant.design/components/time-picker
+// @source https://github.com/ant-design/ant-design/tree/master/components/time-picker
 
 import {CloseCircleFilled} from '@ant-design/icons';
 import {TimePicker as AntDesignTimePicker} from 'antd';

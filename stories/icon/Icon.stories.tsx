@@ -1,9 +1,9 @@
-import {ComponentMeta} from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import 'src/style/reset.css';
-import {storybookSizeArgTypes} from 'src/utils';
-import {CircleOutlined, CircleOutlinedProps} from './CircleOutlined';
+import {CircleOutlined} from './../../src/icon';
+import {storybookSizeArgTypes} from './../utils';
 
 export default {
   title: 'ant-design/CircleOutlined',
@@ -14,6 +14,5 @@ export default {
   },
 } as ComponentMeta<typeof CircleOutlined>;
 
-const DefaultTemplate: FunctionComponent<CircleOutlinedProps> = (props) => <CircleOutlined {...props} />;
-
+const DefaultTemplate: ComponentStory<typeof CircleOutlined> = (props) => <CircleOutlined {...props} />;
 export const Default = DefaultTemplate.bind({});

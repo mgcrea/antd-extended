@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import React, {FunctionComponent, HTMLProps} from 'react';
+import {classNames} from './../utils';
 
 export type CircleOutlinedProps = HTMLProps<HTMLSpanElement>;
 

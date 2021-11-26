@@ -1,0 +1,107 @@
+@root-entry-name: default;
+
+@import (reference) './variables';
+@import (reference) 'antd/lib/style/mixins/index';
+@import (reference) 'antd/lib/style/themes/index';
+// xxl: {fontSize: 24, height: 70, padding: 22}
+
+// @primary-color: @blue-6;
+// @info-color: @primary-color;
+// @success-color: @green-6;
+// @processing-color: @blue-6;
+// @error-color: @red-5;
+// @highlight-color: @red-5;
+// @warning-color: @gold-6;
+// @normal-color: #d9d9d9;
+// @white: #fff;
+// @black: #000;
+
+@transition-duration: 0.15s;
+
+// Font sizes
+// ---
+@font-size-xs: 10px; // @font-size-sm - 2px
+// @font-size-sm: 12px;
+// @font-size-md: 14px;
+// @font-size-lg: @font-size-md + 2px;
+@font-size-xl: 18px; // @font-size-lg + 2px
+@font-size-xxl: 24px; // @font-size-lg + 2px
+
+// Height rules
+// ---
+@height-xs: @height-sm - 4px; // 20px
+// @height-sm: 24px;
+// @height-md: 32px;
+// @height-lg: 40px;
+@height-xl: @height-lg + 8px; // 48px
+@height-xxl: @height-xl + 22px; // 70px
+
+// xl: {fontSize: 18, height: 46, padding: 18},
+// xxl: {fontSize: 24, height: 70, padding: 22}
+
+// vertical padding for all form controls
+// @control-padding-horizontal: @padding-sm;
+// @control-padding-horizontal-sm: @padding-xs;
+
+// Input
+// ---
+@input-height-xs: @height-xs;
+// @input-height-base: @height-base;
+// @input-height-lg: @height-lg;
+// @input-height-sm: @height-sm;
+@input-height-xl: @height-xl;
+@input-height-xxl: @height-xxl;
+
+@input-padding-horizontal-xs: @input-padding-horizontal-sm - 1px;
+// @input-padding-horizontal: @control-padding-horizontal - 1px;
+// @input-padding-horizontal-base: @input-padding-horizontal;
+// @input-padding-horizontal-sm: @control-padding-horizontal-sm - 1px;
+// @input-padding-horizontal-lg: @input-padding-horizontal; // 11px
+@input-padding-horizontal-xl: @input-padding-horizontal-lg + 2px; // 13px
+@input-padding-horizontal-xxl: @input-padding-horizontal-xl + 8px; // 21px
+
+@input-padding-vertical-xs: max(
+  (round((@input-height-xs - @font-size-xs * @line-height-base) / 2 * 10) / 10 - @border-width-base),
+  0
+);
+// @input-padding-vertical-base: max(
+//   round((@input-height-base - @font-size-base * @line-height-base) / 2 * 10) / 10 -
+//     @border-width-base,
+//   3px
+// );
+// @input-padding-vertical-sm: max(
+//   round((@input-height-sm - @font-size-base * @line-height-base) / 2 * 10) / 10 - @border-width-base,
+//   0
+// );
+// @input-padding-vertical-lg: ceil((@input-height-lg - @font-size-lg * @line-height-base) / 2 * 10) /
+//   10 - @border-width-base;
+@input-padding-vertical-xl: (
+  ceil(((@input-height-xl - @font-size-xl * @line-height-base) / 2 * 10)) / 10 - @border-width-base
+);
+@input-padding-vertical-xxl: (
+  ceil(((@input-height-xxl - @font-size-xxl * @line-height-base) / 2 * 10)) / 10 - @border-width-base
+);
+
+// Buttons
+// ---
+@btn-font-size-xs: @font-size-xs;
+@btn-font-size-xl: @font-size-xl;
+@btn-font-size-xxl: @font-size-xxl;
+// @btn-font-size-lg: @font-size-lg;
+// @btn-font-size-sm: @font-size-base;
+@btn-font-size-sm: @font-size-sm + 1;
+@btn-padding-horizontal-xs: @btn-padding-horizontal-sm - 1;
+// @btn-padding-horizontal-base: @padding-md - 1px;
+// @btn-padding-horizontal-lg: @btn-padding-horizontal-base;
+// @btn-padding-horizontal-sm: @padding-xs - 1px;
+@btn-padding-horizontal-xl: @btn-padding-horizontal-lg + 1;
+@btn-padding-horizontal-xxl: @btn-padding-horizontal-xl + 1;
+@btn-height-xs: @height-xs;
+// @btn-height-sm: @height-sm;
+// @btn-height-mg: @height-base;
+// @btn-height-lg: @height-lg;
+@btn-height-xl: @height-xl;
+@btn-height-xxl: @height-xxl;
+
+// Colors
+@disabled-color: var(--grey500);

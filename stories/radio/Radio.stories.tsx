@@ -2,9 +2,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React, {FunctionComponent} from 'react';
 import 'src/style/reset.css';
-import {storybookSizeArgTypes, storybookSizeOptions, StoryContainer} from 'src/utils';
-import {RadioButton} from './RadioButton';
-import {RadioGroup, RadioGroupProps} from './RadioGroup';
+import {RadioButton, RadioGroup, RadioGroupProps} from './../../src/radio';
+import {sizeTemplate, storybookSizeArgTypes} from './../utils';
 
 export default {
   title: 'ant-design/Radio',
@@ -33,16 +32,5 @@ const ButtonTemplate: ComponentStory<typeof RadioGroup> = (props) => (
 );
 export const Buttons = ButtonTemplate.bind({});
 
-const SizeTemplate: ComponentStory<typeof RadioGroup> = (props, context) => (
-  <StoryContainer>
-    {storybookSizeOptions.map((size) => {
-      return (
-        <>
-          <span>{size}</span>
-          {ButtonTemplate({...props, size}, context)}
-        </>
-      );
-    })}
-  </StoryContainer>
-);
+const SizeTemplate = sizeTemplate(DefaultTemplate);
 export const Sizes = SizeTemplate.bind({});
