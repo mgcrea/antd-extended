@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React from 'react';
-import 'src/style/reset.css';
+import '../style/reset.css';
 import {sizeTemplate, storybookSizeArgTypes} from '../utils';
 import {CheckboxButton, CheckboxGroup} from './../../src/checkbox';
 

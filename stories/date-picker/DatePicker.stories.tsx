@@ -2,7 +2,7 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import moment, {Moment} from 'moment';
 import React from 'react';
-import 'src/style/reset.css';
+import '../style/reset.css';
 import {DatePicker} from './../../src/date-picker';
 import {declineTemplate, sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
 

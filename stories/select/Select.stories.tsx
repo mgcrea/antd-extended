@@ -3,7 +3,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React from 'react';
-import 'src/style/reset.css';
+import '../style/reset.css';
 import {Select, SelectOption} from './../../src/select';
 import {sizeTemplate, storybookSizeArgTypes} from './../utils';
 

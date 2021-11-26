@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React, {FunctionComponent} from 'react';
-import 'src/style/reset.css';
+import '../style/reset.css';
 import {RadioButton, RadioGroup, RadioGroupProps} from './../../src/radio';
 import {sizeTemplate, storybookSizeArgTypes} from './../utils';
 

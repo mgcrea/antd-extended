@@ -1,7 +1,7 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import React from 'react';
-import 'src/style/reset.css';
+import '../style/reset.css';
 import {Password} from './../../src/input';
 import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
 
