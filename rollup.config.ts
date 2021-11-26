@@ -48,6 +48,7 @@ const config = {
       flatten: false,
     }),
   ],
+  external: ['@ant-design/icons', '@ant-design/colors'],
 };
 
 export default config;

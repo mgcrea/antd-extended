@@ -24,6 +24,7 @@
   "peerDependencies": {
     "antd": ">=4.17",
     "classnames": ">=2",
+    "moment": ">=2",
     "react": ">=17"
   },
   "devDependencies": {
