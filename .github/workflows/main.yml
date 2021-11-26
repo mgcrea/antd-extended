@@ -56,7 +56,7 @@ jobs:
       - name: Setup 🔧
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: '16'
           cache: 'npm'
       - name: Install 🔧
         run: npm ci
