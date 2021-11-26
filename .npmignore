@@ -6,6 +6,7 @@
 !CHANGELOG*
 !lib/**/*.js
 !lib/**/*.less
+!lib/**/*.css
 !lib/**/*.js.map
 !lib/**/*.d.ts
 !src/**/*.ts
