@@ -1,6 +1,6 @@
 {
   "name": "@mgcrea/antd-extended",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "license": "MIT",
   "main": "./lib/umd/index.js",
   "module": "./lib/esm/index.js",
