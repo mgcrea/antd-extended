@@ -11,12 +11,6 @@ const sourcemap = true;
 
 const config = {
   input: 'src/index.ts',
-  // watch: {
-  //   chokidar: {
-  //     usePolling: true,
-  //     paths: 'src/**',
-  //   },
-  // },
   output: [
     {
       exports: 'named',
@@ -31,6 +25,7 @@ const config = {
       format: 'esm',
       sourcemap,
       preserveModules: true,
+      preserveModulesRoot: 'src/',
     },
   ],
   plugins: [
