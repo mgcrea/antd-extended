@@ -2,12 +2,12 @@ const vitePluginImp = require('vite-plugin-imp');
 const path = require('path');
 
 module.exports = {
-  stories: ['../{src,stories}/**/*.stories.mdx', '../{src,stories}/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: ['../stories/**/*.stories.mdx', '../stories/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/preset-ant-design'],
   framework: '@storybook/react',
-  core: {
-    // builder: 'storybook-builder-vite',
-  },
+  // core: {
+  //   builder: 'storybook-builder-vite',
+  // },
   async webpackFinal(config) {
     config.resolve.alias['src'] = `${path.resolve(__dirname, '../src')}/`;
     return config;

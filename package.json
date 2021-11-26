@@ -19,7 +19,7 @@
     "prettycheck": "prettier --check src/ stories/",
     "typecheck": "tsc --noEmit",
     "test": "npm run lint && npm run prettycheck && npm run typecheck",
-    "build-storybook": "build-storybook"
+    "docs": "build-storybook -o ./docs"
   },
   "peerDependencies": {
     "antd": ">=4.17",
