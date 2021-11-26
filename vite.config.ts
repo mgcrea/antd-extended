@@ -23,4 +23,11 @@ module.exports = defineConfig({
       },
     },
   },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true,
+      },
+    },
+  },
 });

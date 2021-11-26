@@ -1,12 +1,11 @@
 // @docs https://ant.design/components/time-picker
 
-import {useEffect} from '@storybook/addons';
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/style/index.less';
 import moment, {Moment} from 'moment';
-import React, {useState} from 'react';
+import React from 'react';
 import 'src/style/reset.css';
-import {TimePicker, TimePickerProps} from './../../src/time-picker';
+import {TimePicker} from './../../src/time-picker';
 import {declineTemplate, sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
 
 export default {

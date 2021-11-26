@@ -2,8 +2,8 @@ import {ComponentMeta, ComponentStory} from '@storybook/react';
 import 'antd/lib/button/style/index.less';
 import React, {FunctionComponent} from 'react';
 import 'src/style/reset.css';
-import {sizeTemplate, storybookSizeArgTypes, storybookSizeOptions, StoryContainer} from '../utils';
-import {Button, ButtonProps} from './../../src/Button';
+import {sizeTemplate, storybookSizeArgTypes} from '../utils';
+import {Button, ButtonProps} from './../../src/button';
 
 export default {
   title: 'ant-design/Button',

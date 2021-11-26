@@ -3,13 +3,16 @@ const path = require('path');
 
 module.exports = {
   stories: ['../{src,stories}/**/*.stories.mdx', '../{src,stories}/**/*.stories.@(js|jsx|ts|tsx)'],
-  addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
+  addons: ['@storybook/addon-links', '@storybook/addon-essentials', '@storybook/preset-ant-design'],
   framework: '@storybook/react',
   core: {
-    builder: 'storybook-builder-vite',
+    // builder: 'storybook-builder-vite',
+  },
+  async webpackFinal(config) {
+    config.resolve.alias['src'] = `${path.resolve(__dirname, '../src')}/`;
+    return config;
   },
   async viteFinal(config, {configType}) {
-    // customize the Vite config here
     config.resolve.alias['src/'] = `${path.resolve(__dirname, '../src')}/`;
     config.plugins.push(
       vitePluginImp.default({
@@ -35,7 +38,6 @@ module.exports = {
       },
     };
 
-    // return the customized config
     return config;
   },
 };
