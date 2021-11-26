@@ -6,6 +6,10 @@
 - Adds a new `secondary` type for buttons
 - Adds `utc` mode to date-related pickers
 
+## Docs
+
+- [Storybook](https://mgcrea.github.io/antd-extended)
+
 ## Install
 
 ```sh
