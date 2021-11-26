@@ -1,0 +1,65 @@
+// @import (reference) 'antd/lib/style/themes/index-pure';
+@import (reference) 'antd/lib/select/style';
+@import (reference) '../../style/themes/default';
+
+.ant-select {
+  transition: all 0.15s;
+}
+
+.@{select-prefix-cls}-selector {
+  padding: 0 @input-padding-horizontal-xs;
+}
+.ant-select-single:not(.ant-select-customize-input) {
+  &.ant-select-xs {
+    .ant-select-single.select-size('xs', @input-height-xs);
+    font-size: @font-size-xs;
+    .@{select-prefix-cls}-selector {
+      padding: 0 @input-padding-horizontal-xs;
+    }
+  }
+  &.ant-select-xl {
+    .ant-select-single.select-size('xl', @input-height-xl);
+    font-size: @font-size-xl;
+    .@{select-prefix-cls}-selector {
+      padding: 0 @input-padding-horizontal-xl;
+    }
+    &.@{select-prefix-cls}-show-arrow,
+    &.@{select-prefix-cls}-allow-clear,
+    &.@{select-prefix-cls}-show-search {
+      .ant-select-selection-placeholder {
+        padding-right: (@input-padding-horizontal-xl * 2);
+      }
+    }
+  }
+  &.ant-select-xxl {
+    .ant-select-single.select-size('xxl', @input-height-xxl);
+    font-size: @font-size-xxl;
+    .@{select-prefix-cls}-selector {
+      border-radius: 4px;
+      padding: 0 @input-padding-horizontal-xxl;
+    }
+    .@{select-prefix-cls}-arrow,
+    .@{select-prefix-cls}-clear {
+      margin-top: -@font-size-xxl / 2;
+      width: @font-size-xxl;
+      height: @font-size-xxl;
+      font-size: @font-size-xxl;
+      right: (@input-padding-horizontal-xxl + @font-size-xxl / 2);
+    }
+    .@{select-prefix-cls}-selection-search {
+      right: @input-padding-horizontal-xxl;
+      left: @input-padding-horizontal-xxl;
+    }
+    &.@{select-prefix-cls}-show-arrow {
+      .@{select-prefix-cls}-selection-search {
+        right: (@input-padding-horizontal-xxl + @font-size-xxl + @font-size-xxl / 2);
+      }
+    }
+  }
+  // @NOTE always hide any arrow/suffix when clear icon exists
+  &.@{select-prefix-cls}-allow-clear {
+    > span:not(:only-of-type).@{select-prefix-cls}-arrow {
+      display: none !important;
+    }
+  }
+}
