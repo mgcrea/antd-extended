@@ -1,9 +1,7 @@
 // @source https://github.com/ant-design/ant-design/blob/master/components/button/style
 
-@import (reference) 'antd/lib/button/style';
+@import (reference) 'antd/lib/button/style/index.less';
 @import (reference) '../../style/themes/default';
-@import '../../style/themes/variables';
-
 
 .@{btn-prefix-cls} {
   transition: all 0.15s;
@@ -25,54 +23,46 @@
   }
 }
 
-// .ant-btn-secondary {
-//   color: var(--grey700);
-//   background-color: var(--grey300);
-//   border-color: var(--grey300);
-//   &:hover {
-//     background-color: var(--grey400);
-//     border-color: var(--grey400);
-//   }
-// }
-
 .ant-btn-secondary {
-    .button-variant-other(var(--grey700); var(--grey300); var(--grey300));
-    &:hover,
-    &:focus,
-    &:active {
-      text-decoration: none;
-      color: var(--grey800);
-      background: var(--grey400);
-      border-color: var(--grey400);
-    }
+  // .button-variant-other(@btn-default-color, @btn-default-bg, @btn-default-border);
+  // .button-variant-primary(white; @secondary-color; red, green);
+  .button-variant-other(white; @secondary-color; @secondary-color);
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: none;
+    color: white;
+    background: @secondary-color;
+    border-color: @secondary-color;
+  }
 
-    // .@{btn-prefix-cls}-group &:not(:first-child):not(:last-child) {
-    //   border-right-color: @btn-group-border;
-    //   border-left-color: @btn-group-border;
+  // .@{btn-prefix-cls}-group &:not(:first-child):not(:last-child) {
+  //   border-right-color: @btn-group-border;
+  //   border-left-color: @btn-group-border;
 
-    //   &:disabled {
-    //     border-color: @btn-default-border;
-    //   }
-    // }
+  //   &:disabled {
+  //     border-color: @btn-default-border;
+  //   }
+  // }
 
-    // .@{btn-prefix-cls}-group &:first-child {
-    //   &:not(:last-child) {
-    //     border-right-color: @btn-group-border;
+  // .@{btn-prefix-cls}-group &:first-child {
+  //   &:not(:last-child) {
+  //     border-right-color: @btn-group-border;
 
-    //     &[disabled] {
-    //       border-right-color: @btn-default-border;
-    //     }
-    //   }
-    // }
+  //     &[disabled] {
+  //       border-right-color: @btn-default-border;
+  //     }
+  //   }
+  // }
 
-    // .@{btn-prefix-cls}-group &:last-child:not(:first-child),
-    // .@{btn-prefix-cls}-group & + & {
-    //   border-left-color: @btn-group-border;
+  // .@{btn-prefix-cls}-group &:last-child:not(:first-child),
+  // .@{btn-prefix-cls}-group & + & {
+  //   border-left-color: @btn-group-border;
 
-    //   &[disabled] {
-    //     border-left-color: @btn-default-border;
-    //   }
-    // }
+  //   &[disabled] {
+  //     border-left-color: @btn-default-border;
+  //   }
+  // }
 }
 
 // .ant-btn {

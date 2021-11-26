@@ -146,7 +146,7 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
     // @NOTE non-utc support?
     const isDisabledInside = isBeforeOverflows && !isAfterOverflows;
     if (isDisabledInside) {
-      const [beforeHour, beforeMinutes] = [isBefore!.hour(), isBefore!.minutes()];
+      const [beforeHour, beforeMinutes] = [isBefore.hour(), isBefore.minutes()];
       const [afterHour, afterMinutes] = [isAfter ? isAfter.hour() : 24, isAfter ? isAfter.minutes() : 0];
       values.push(
         ...integerArraySuite(
