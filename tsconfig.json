@@ -19,7 +19,8 @@
     "outDir": "./lib",
     "baseUrl": ".",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "stories/*": ["stories/*"]
     }
   },
   "include": ["./src"]

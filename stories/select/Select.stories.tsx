@@ -1,11 +1,9 @@
 // @docs https://ant.design/components/select
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {Select, SelectOption} from './../../src/select';
-import {sizeTemplate, storybookSizeArgTypes} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix} from './../utils';
 
 const options = [
   {label: 'Jack', value: 'jack'},
@@ -16,7 +14,7 @@ const options = [
 const values = options.map(({value}) => value);
 
 export default {
-  title: 'ant-design/Select',
+  title: `${titlePrefix}Select`,
   component: Select,
   argTypes: {
     ...storybookSizeArgTypes,

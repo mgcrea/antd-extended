@@ -1,12 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {Search} from './../../src/input';
-import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
 
 const meta: ComponentMeta<typeof Search> = {
-  title: 'ant-design/Input/Search',
+  title: `${titlePrefix}Input/Search`,
   component: Search,
   argTypes: {
     ...storybookSizeArgTypes,

@@ -1,13 +1,12 @@
 // @docs https://ant.design/components/tag/
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
+import {titlePrefix} from '../utils';
 import {Tag} from './../../src/tag';
 
 export default {
-  title: 'ant-design/Tag',
+  title: `${titlePrefix}Tag`,
   component: Tag,
   argTypes: {},
 } as ComponentMeta<typeof Tag>;

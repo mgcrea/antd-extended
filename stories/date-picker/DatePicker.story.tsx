@@ -1,13 +1,13 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import moment, {Moment} from 'moment';
-import React from 'react';
-import '../style/reset.css';
-import {DatePicker} from './../../src/date-picker';
-import {declineTemplate, sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {DatePicker, DatePickerProps} from '../../src/date-picker';
+import {declineTemplate, sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from '../utils';
+export {DatePicker};
 
-export default {
-  title: 'ant-design/DatePicker',
+const startOfOptions: DatePickerProps['startOf'][] = ['day', 'hour', 'minute', 'second'];
+
+export const meta: ComponentMeta<typeof DatePicker> = {
+  title: `${titlePrefix}DatePicker`,
   component: DatePicker,
   argTypes: {
     ...storybookSizeArgTypes,
@@ -24,19 +24,22 @@ export default {
       control: {type: 'boolean'},
     },
     startOf: {
-      options: ['minute', 'second'],
+      options: startOfOptions,
       control: {type: 'select'},
     },
     onChange: {action: 'changed'},
   },
   args: {
+    value: moment(),
     placeholder: 'Date',
-    format: 'YYYY-mm-DD',
+    format: 'YYYY-MM-DD',
     utc: false,
   },
-} as ComponentMeta<typeof DatePicker>;
+};
 
-const DefaultTemplate: ComponentStory<typeof DatePicker> = withLocalState((props) => <DatePicker {...props} />, {
+// export default meta;
+
+const DefaultTemplate: ComponentStory<typeof DatePicker> = withLocalState(DatePicker, {
   argValueInjector: (value: number) => moment(value),
   argValueExtractor: (value: Moment) => value.toDate().getTime(),
   labelExtractor: (value: Moment) => value.toISOString(),
@@ -52,5 +55,11 @@ const StartOfOptionTemplate = declineTemplate(DefaultTemplate, {
 });
 export const StartOfOption = StartOfOptionTemplate.bind({});
 
-const UtcOptionTemplate = declineTemplate(DefaultTemplate, {name: 'utc', options: [true, false]});
+const UtcOptionTemplate = declineTemplate(DefaultTemplate, {name: 'utc', options: [true, false], layout: 'horizontal'});
+// const UtcOptionTemplate = (props) => createElement(DatePicker, props);
+// const UtcOptionTemplate = withLocalState(DatePicker, {
+//   argValueInjector: (value: number) => moment(value),
+//   argValueExtractor: (value: Moment) => value.toDate().getTime(),
+//   // labelExtractor: (value: Moment) => value.toISOString(),
+// });
 export const UtcOption = UtcOptionTemplate.bind({});

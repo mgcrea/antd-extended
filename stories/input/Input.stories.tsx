@@ -1,12 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {Input} from './../../src/input';
-import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
 
 export default {
-  title: 'ant-design/Input',
+  title: `${titlePrefix}Input`,
   component: Input,
   argTypes: {
     ...storybookSizeArgTypes,

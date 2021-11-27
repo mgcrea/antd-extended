@@ -10,6 +10,7 @@ module.exports = {
   // },
   async webpackFinal(config) {
     config.resolve.alias['src'] = `${path.resolve(__dirname, '../src')}/`;
+    config.resolve.alias['stories'] = `${path.resolve(__dirname, '../stories')}/`;
     return config;
   },
   async viteFinal(config, {configType}) {

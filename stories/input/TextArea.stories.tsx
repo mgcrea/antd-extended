@@ -1,12 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {TextArea} from './../../src/input';
-import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
 
 const meta: ComponentMeta<typeof TextArea> = {
-  title: 'ant-design/Input/TextArea',
+  title: `${titlePrefix}Input/TextArea`,
   component: TextArea,
   argTypes: {
     ...storybookSizeArgTypes,

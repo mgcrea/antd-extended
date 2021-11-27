@@ -1,0 +1,32 @@
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs';
+import {Button, meta, Default, Types, Sizes} from './Button.story';
+
+<Meta title={meta.title} component={meta.component} argTypes={meta.argTypes} args={meta.args} />
+
+## Default
+
+<Canvas>
+  <Story name="Default">{Default}</Story>
+</Canvas>
+
+<ArgsTable of={Button} story="^" include={['size', 'type']} />
+
+## Sizes
+
+New sizes are available: `x-small`, `x-large` and `xx-large`:
+
+<Canvas>
+  <Story name="Sizes">{Sizes}</Story>
+</Canvas>
+
+## Types
+
+A new `secondary` type is available:
+
+<Canvas>
+  <Story name="Types">{Types}</Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={Button} />

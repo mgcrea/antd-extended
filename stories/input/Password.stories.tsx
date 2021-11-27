@@ -1,12 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {Password} from './../../src/input';
-import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
 
 const meta: ComponentMeta<typeof Password> = {
-  title: 'ant-design/Input/Password',
+  title: `${titlePrefix}Input/Password`,
   component: Password,
   argTypes: {
     ...storybookSizeArgTypes,

@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {useArgs} from '@storybook/addons';
-import {ComponentStory} from '@storybook/react';
-import React, {ComponentProps, JSXElementConstructor, useEffect, useState} from 'react';
-import {StoryContainer} from './components';
+import {ArgTypes, ComponentStory} from '@storybook/react';
+import React, {ComponentProps, createElement, JSXElementConstructor, useEffect, useState} from 'react';
+import {StoryContainer, StoryContainerProps} from './components';
 import {storybookSizeOptions} from './size';
 
 type LocalStateOptions = {
@@ -26,7 +26,7 @@ export function withLocalState<T extends JSXElementConstructor<P>, P extends {[s
     valuePropName = 'value',
     trigger = 'onChange',
   } = options;
-  const WrappedStory: ComponentStory<T> = (props, context) => {
+  const WrappedStory: ComponentStory<T> = (props, _context) => {
     const {[valuePropName]: valueProp, [trigger]: onChangeProp, ...otherProps} = props;
     const [_args, updateArgs] = useArgs();
     const [value, setValue] = useState<any>(argValueInjector ? argValueInjector(valueProp) : valueProp);
@@ -38,12 +38,14 @@ export function withLocalState<T extends JSXElementConstructor<P>, P extends {[s
       onChangeProp && onChangeProp(...args);
     };
     useEffect(() => {
-      setValue(argValueInjector ? argValueInjector(valueProp) : valueProp);
+      if (typeof valueProp !== 'undefined') {
+        setValue(argValueInjector ? argValueInjector(valueProp) : valueProp);
+      }
     }, [valueProp]);
 
     return (
       <div style={{textAlign: 'center'}}>
-        {story({[trigger]: onChange, [valuePropName]: value, ...otherProps} as ComponentProps<T>, context)}
+        {createElement(story, {[trigger]: onChange, [valuePropName]: value, ...otherProps} as ComponentProps<T>)}
         <div style={{textAlign: 'center'}}>
           <small>
             {valuePropName}={labelExtractor ? labelExtractor(value) : String(value)}
@@ -56,19 +58,13 @@ export function withLocalState<T extends JSXElementConstructor<P>, P extends {[s
   return WrappedStory;
 }
 
-export function sizeTemplate<T extends JSXElementConstructor<P>, P extends {[s: string]: any}>(
-  template: ComponentStory<T>,
-) {
-  return declineTemplate<T, P>(template, {name: 'size', options: storybookSizeOptions});
-}
-
-type DeclineTemplateOptions = {
+type DeclineTemplateOptions = StoryContainerProps & {
   name: string;
   options: any[];
 };
 export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[s: string]: any}>(
   template: ComponentStory<T>,
-  {name, options}: DeclineTemplateOptions,
+  {name, options, ...otherProps}: DeclineTemplateOptions,
 ) {
   const labelValue = (value): string => {
     switch (typeof value) {
@@ -83,11 +79,11 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
 
   const WrappedStory: ComponentStory<T> = (props, context) => {
     return (
-      <StoryContainer>
+      <StoryContainer {...otherProps}>
         {options.map((value) => {
           return (
             <div key={`${value}`}>
-              <div style={{textAlign: 'center'}}>
+              <div style={{textAlign: 'center', color: '#333'}}>
                 <small>
                   {name}={labelValue(value)}
                 </small>
@@ -99,7 +95,14 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
       </StoryContainer>
     );
   };
-  WrappedStory.argTypes = {[name]: {control: {type: null}}};
+  WrappedStory.argTypes = {[name]: {control: {type: null}}} as unknown as Partial<ArgTypes<ComponentProps<T>>>;
 
   return WrappedStory;
+}
+
+export function sizeTemplate<T extends JSXElementConstructor<P>, P extends {[s: string]: any}>(
+  template: ComponentStory<T>,
+  otherProps: Omit<DeclineTemplateOptions, 'name' | 'options'> = {},
+) {
+  return declineTemplate<T, P>(template, {...otherProps, name: 'size', options: storybookSizeOptions});
 }

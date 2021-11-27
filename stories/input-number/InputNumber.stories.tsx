@@ -1,14 +1,12 @@
 // https://ant.design/components/input-number/
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React from 'react';
-import '../style/reset.css';
 import {InputNumber} from './../../src/input-number';
-import {sizeTemplate, storybookSizeArgTypes, withLocalState} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
 
 export default {
-  title: 'ant-design/InputNumber',
+  title: `${titlePrefix}InputNumber`,
   component: InputNumber,
   argTypes: {
     ...storybookSizeArgTypes,

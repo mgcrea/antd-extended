@@ -1,12 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import 'antd/lib/style/index.less';
 import React, {FunctionComponent} from 'react';
-import '../style/reset.css';
 import {RadioButton, RadioGroup, RadioGroupProps} from './../../src/radio';
-import {sizeTemplate, storybookSizeArgTypes} from './../utils';
+import {sizeTemplate, storybookSizeArgTypes, titlePrefix} from './../utils';
 
 export default {
-  title: 'ant-design/Radio',
+  title: `${titlePrefix}Radio`,
   component: RadioGroup,
   argTypes: {
     ...storybookSizeArgTypes,
