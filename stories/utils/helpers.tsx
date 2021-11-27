@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {useArgs} from '@storybook/addons';
 import {ArgTypes, ComponentStory} from '@storybook/react';
-import React, {ComponentProps, createElement, JSXElementConstructor, useEffect, useState} from 'react';
-import {StoryContainer, StoryContainerProps} from './components';
+import React, {
+  ComponentProps,
+  createElement,
+  FunctionComponent,
+  JSXElementConstructor,
+  useEffect,
+  useState,
+} from 'react';
+import {Label, StoryContainer, StoryContainerProps} from './components';
 import {storybookSizeOptions} from './size';
 
 type LocalStateOptions = {
@@ -66,28 +73,13 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
   template: ComponentStory<T>,
   {name, options, ...otherProps}: DeclineTemplateOptions,
 ) {
-  const labelValue = (value): string => {
-    switch (typeof value) {
-      case 'boolean':
-        return value ? 'true' : 'false';
-      case 'string':
-        return `"${value}"`;
-      default:
-        return value;
-    }
-  };
-
   const WrappedStory: ComponentStory<T> = (props, context) => {
     return (
       <StoryContainer {...otherProps}>
         {options.map((value) => {
           return (
             <div key={`${value}`}>
-              <div style={{textAlign: 'center', color: '#333'}}>
-                <small>
-                  {name}={labelValue(value)}
-                </small>
-              </div>
+              <Label name={name} value={value} />
               {template({...props, [name]: value}, context)}
             </div>
           );
@@ -96,7 +88,6 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
     );
   };
   WrappedStory.argTypes = {[name]: {control: {type: null}}} as unknown as Partial<ArgTypes<ComponentProps<T>>>;
-
   return WrappedStory;
 }
 

@@ -30,5 +30,5 @@ const ButtonTemplate: ComponentStory<typeof RadioGroup> = (props) => (
 );
 export const Buttons = ButtonTemplate.bind({});
 
-const SizeTemplate = sizeTemplate(DefaultTemplate);
+const SizeTemplate = sizeTemplate(ButtonTemplate);
 export const Sizes = SizeTemplate.bind({});
