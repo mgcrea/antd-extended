@@ -1,5 +1,23 @@
 # antd-extended
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@mgcrea/antd-extended">
+    <img src="https://img.shields.io/npm/v/@mgcrea/antd-extended.svg?style=for-the-badge" alt="npm version" />
+  </a>
+  <!-- <a href="https://www.npmjs.com/package/@mgcrea/antd-extended">
+    <img src="https://img.shields.io/npm/dt/@mgcrea/antd-extended.svg?style=for-the-badge" alt="npm total downloads" />
+  </a> -->
+  <a href="https://www.npmjs.com/package/@mgcrea/antd-extended">
+    <img src="https://img.shields.io/npm/dm/@mgcrea/antd-extended.svg?style=for-the-badge" alt="npm monthly downloads" />
+  </a>
+  <a href="https://www.npmjs.com/package/@mgcrea/antd-extended">
+    <img src="https://img.shields.io/npm/l/@mgcrea/antd-extended.svg?style=for-the-badge" alt="npm license" />
+  </a>
+  <a href="https://github.com/mgcrea/antd-extended/actions/workflows/main.yml">
+    <img src="https://img.shields.io/github/workflow/status/mgcrea/antd-extended/main?style=for-the-badge" alt="github main workflow" />
+  </a>
+</p>
+
 ## Features
 
 - Adds several new sizes `x-small`, `x-large` and `xx-large` to most components
