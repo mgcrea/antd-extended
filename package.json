@@ -16,6 +16,7 @@
     "docs": "build-storybook -o ./docs"
   },
   "peerDependencies": {
+    "@ant-design/icons": ">=4.7",
     "antd": ">=4.17",
     "classnames": ">=2",
     "moment": ">=2",
