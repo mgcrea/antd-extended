@@ -4,7 +4,7 @@ import AntDesignSearch, {SearchProps as AntDesignSearchProps} from 'antd/lib/inp
 import React, {FunctionComponent, useCallback} from 'react';
 import {useDebounce} from './../hooks';
 import {applySizeProps, SizeType} from './../utils';
-import './style/search-input.less';
+import './style/search.less';
 
 export type SearchProps = Omit<AntDesignSearchProps, 'size'> & {
   debounce?: number;

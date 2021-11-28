@@ -4,6 +4,7 @@ import {Input} from 'antd';
 import {PasswordProps as AntDesignPasswordProps} from 'antd/lib/input';
 import React, {FunctionComponent} from 'react';
 import {applySizeClassNames, SizeType} from './../utils';
+import './style/input.less';
 
 const AntDesignPassword = Input.Password;
 

@@ -5,7 +5,7 @@ import SizeContext from 'antd/lib/config-provider/SizeContext';
 import AntDesignTextArea, {TextAreaProps as AntDesignTextAreaProps} from 'antd/lib/input/TextArea';
 import React, {FunctionComponent, useContext} from 'react';
 import {applySizeClassNames, SizeType} from './../utils';
-import './style/search-input.less';
+import './style/input.less';
 
 export type TextAreaProps = Omit<AntDesignTextAreaProps, 'size'> & {
   size?: SizeType;
