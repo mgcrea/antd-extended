@@ -26,6 +26,9 @@ const config = {
       sourcemap,
       preserveModules: true,
       preserveModulesRoot: 'src/',
+      sourcemapPathTransform: (relativeSourcePath, _sourcemapPath) => {
+        return relativeSourcePath.replace(/^\.\.\//, '');
+      },
     },
   ],
   plugins: [
