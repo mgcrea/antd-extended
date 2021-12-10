@@ -20,8 +20,8 @@
 
 ## Features
 
+- Uses [dayjs](https://github.com/iamkun/dayjs/) instead of [moment](https://github.com/moment/moment/) for all date-related pickers
 - Adds several new sizes `x-small`, `x-large` and `xx-large` to most components
-- Uses [dayjs](https://github.com/iamkun/dayjs/) for picker by defaults
 - Adds a new `secondary` type for buttons
 - Adds `utc` mode to date-related pickers
 
