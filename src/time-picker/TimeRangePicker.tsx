@@ -1,17 +1,16 @@
 // @docs https://ant.design/components/date-picker
 // @source https://github.com/ant-design/ant-design/tree/master/components/date-picker
 
-import {TimePicker as AntDesignTimePicker} from 'antd';
-import {TimeRangePickerProps as AntDesignTimeRangePickerProps} from 'antd/lib/time-picker';
 import {applySizeProps, SizeType} from './../utils';
 import React, {FunctionComponent} from 'react';
+import {DatePicker, RangePickerTimeProps} from './../date-picker/Picker';
 
-const {RangePicker: AntDesignTimeRangePicker} = AntDesignTimePicker;
+const {RangePicker: InternalRangePicker} = DatePicker;
 
-export type TimeRangePickerProps = Omit<AntDesignTimeRangePickerProps, 'size'> & {
+export type TimeRangePickerProps = Omit<RangePickerTimeProps, 'size'> & {
   size?: SizeType;
 };
 
 export const TimeRangePicker: FunctionComponent<TimeRangePickerProps> = ({size, className, ...otherProps}) => {
-  return <AntDesignTimeRangePicker {...applySizeProps('ant-picker', {size, className})} {...otherProps} />;
+  return <InternalRangePicker {...applySizeProps('ant-picker', {size, className})} {...otherProps} />;
 };

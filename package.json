@@ -19,7 +19,7 @@
     "@ant-design/icons": ">=4.7",
     "antd": ">=4.17",
     "classnames": ">=2",
-    "moment": ">=2",
+    "dayjs": ">=1",
     "react": ">=17"
   },
   "devDependencies": {

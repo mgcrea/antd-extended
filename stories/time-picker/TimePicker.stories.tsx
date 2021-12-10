@@ -1,10 +1,18 @@
 // @docs https://ant.design/components/time-picker
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import moment, {Moment} from 'moment';
 import React from 'react';
 import {TimePicker} from './../../src/time-picker';
-import {declineTemplate, sizeTemplate, storybookSizeArgTypes, titlePrefix, withLocalState} from './../utils';
+import {
+  argValueExtractor,
+  argValueInjector,
+  declineTemplate,
+  labelExtractor,
+  sizeTemplate,
+  storybookSizeArgTypes,
+  titlePrefix,
+  withLocalState,
+} from './../utils';
 
 export default {
   title: `${titlePrefix}TimePicker`,
@@ -27,7 +35,6 @@ export default {
       options: ['minute', 'second'],
       control: {type: 'select'},
     },
-    onChange: {action: 'changed'},
   },
   args: {
     placeholder: 'Start time',
@@ -38,9 +45,9 @@ export default {
 } as ComponentMeta<typeof TimePicker>;
 
 const DefaultTemplate: ComponentStory<typeof TimePicker> = withLocalState((props) => <TimePicker {...props} />, {
-  argValueInjector: (value: number) => moment(value),
-  argValueExtractor: (value: Moment) => value.toDate().getTime(),
-  labelExtractor: (value: Moment) => value.toISOString(),
+  argValueInjector,
+  argValueExtractor,
+  labelExtractor,
 });
 export const Default = DefaultTemplate.bind({});
 

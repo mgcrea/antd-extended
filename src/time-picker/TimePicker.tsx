@@ -2,21 +2,22 @@
 // @source https://github.com/ant-design/ant-design/tree/master/components/time-picker
 
 import {CloseCircleFilled} from '@ant-design/icons';
-import {TimePicker as AntDesignTimePicker} from 'antd';
-import {TimePickerProps as AntDesignTimePickerProps} from 'antd/lib/time-picker';
-import moment, {Moment, MomentFormatSpecification, unitOfTime} from 'moment';
-import React, {FunctionComponent, useCallback, useMemo} from 'react';
-import {applySizeProps, SizeType} from './../utils';
-import './style/time-picker.less';
+import {OpUnitType} from 'dayjs';
+import React, {FunctionComponent, useCallback, useMemo, useRef} from 'react';
+import {DatePicker, PickerTimeProps} from '../date-picker/Picker';
+import {applySizeProps, SizeType} from '../utils';
 
-export type TimePickerProps = Omit<AntDesignTimePickerProps, 'size' | 'format'> & {
+const {TimePicker: InternalTimePicker} = DatePicker;
+
+type Defined<T> = T extends undefined ? never : T;
+export type TimePickerValue = Defined<PickerTimeProps['value']>;
+
+export type TimePickerProps = Omit<PickerTimeProps, 'picker' | 'size' | 'onSelect'> & {
   size?: SizeType;
-  startOf?: unitOfTime.Base;
-  // isBefore?: MomentInput;
-  // isAfter?: MomentInput;
-  format?: MomentFormatSpecification;
-  isBefore?: Moment | null;
-  isAfter?: Moment | null;
+  startOf?: OpUnitType;
+  onSelect?: (value: TimePickerValue) => void;
+  isBefore?: TimePickerValue;
+  isAfter?: TimePickerValue;
   utc?: boolean;
 };
 
@@ -36,118 +37,122 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
   utc,
   ...otherProps
 }) => {
+  const lastSelectedValue = useRef<TimePickerValue>(valueProp || null);
   const handleReset = useCallback(() => {
     if (onSelect) {
-      onSelect(null as unknown as Moment);
+      onSelect(null);
     }
   }, [onSelect]);
-  const clearIcon = useMemo<NonNullable<AntDesignTimePickerProps['clearIcon']>>(
+  const clearIcon = useMemo<NonNullable<PickerTimeProps['clearIcon']>>(
     () => <CloseCircleFilled onClick={handleReset} role="button" />,
     [handleReset],
   );
   const isBeforeOverflows = utc && isBefore && isBefore.date() > 1;
   const isAfterOverflows = utc && isAfter && isAfter.date() > 1;
 
-  const applyMomentOptions = useCallback(
-    (value: Moment | null): Moment | null => {
-      if (!value) {
-        return value;
+  const applyDateOptions = useCallback(
+    (nextValue: TimePickerValue): TimePickerValue => {
+      if (!nextValue) {
+        return nextValue;
       }
+      let value = nextValue;
       if (utc) {
         // @NOTE Keep existing date for utc-like values to allow overflowing
         const nextDate = value.year() === 1970 && value.month() === 0 ? value.date() : 1;
-        value.year(1970).month(0).date(nextDate).utc(true);
+        value = value.year(1970).month(0).date(nextDate).utc(true);
       }
       if (startOf) {
-        value.startOf(startOf);
+        value = value.startOf(startOf);
       }
       return value;
     },
     [startOf, utc],
   );
 
-  const isBeforeWithOptions = useMemo<Moment | null>(
-    () => (isBefore ? applyMomentOptions(moment(isBefore).clone()) : null),
-    [applyMomentOptions, isBefore],
-  );
-  const isAfterWithOptions = useMemo<Moment | null>(
-    () => (isAfter ? applyMomentOptions(moment(isAfter).clone()) : null),
-    [applyMomentOptions, isAfter],
+  // const isBeforeWithOptions = useMemo<TimePickerValue>(
+  //   () => (isBefore ? applyDateOptions(dayjs(isBefore).clone()) : null),
+  //   [applyDateOptions, isBefore],
+  // );
+  // const isAfterWithOptions = useMemo<TimePickerValue>(
+  //   () => (isAfter ? applyDateOptions(dayjs(isAfter).clone()) : null),
+  //   [applyDateOptions, isAfter],
+  // );
+
+  // const performOnSelect = useCallback<NonNullable<TimePickerProps['onSelect']>>(
+  //   (value) => {
+  //     if (!onSelect) {
+  //       return;
+  //     }
+  //     if (isBeforeWithOptions) {
+  //       if (value && value.isSameOrAfter(isBeforeWithOptions)) {
+  //         onSelect(isBeforeWithOptions.clone().subtract(1, startOf));
+  //         return;
+  //       }
+  //     }
+  //     if (isAfterWithOptions && !isBeforeOverflows) {
+  //       if (value && value.isSameOrBefore(isAfterWithOptions)) {
+  //         onSelect(isAfterWithOptions.clone().add(1, startOf));
+  //         return;
+  //       }
+  //     }
+  //     const nextValue = value && isAfterOverflows ? value.clone().add(1, 'day') : value;
+  //     onSelect(nextValue);
+  //   },
+  //   [isBeforeWithOptions, isBeforeOverflows, isAfterWithOptions, isAfterOverflows, startOf, onSelect],
+  // );
+
+  const handleSelect = useCallback<NonNullable<TimePickerProps['onSelect']>>(
+    (value) => {
+      lastSelectedValue.current = value;
+      if (onSelect) {
+        onSelect(value);
+      }
+      // const value = applyDateOptions(nextValue);
+      // performOnSelect(value);
+    },
+    [onSelect],
   );
 
-  const performOnSelect = useCallback<NonNullable<AntDesignTimePickerProps['onSelect']>>(
-    (value) => {
-      if (!onSelect) {
+  const handleBlur = useCallback<NonNullable<TimePickerProps['onBlur']>>(
+    (ev) => {
+      const {current: value} = lastSelectedValue;
+      if (!value) {
         return;
       }
-      if (isBeforeWithOptions) {
-        if (value.isSameOrAfter(isBeforeWithOptions)) {
-          onSelect(isBeforeWithOptions.clone().subtract(1, startOf));
-          return;
-        }
+      if (onChange) {
+        onChange(value, value.format(`${format}`));
       }
-      if (isAfterWithOptions && !isBeforeOverflows) {
-        if (value.isSameOrBefore(isAfterWithOptions)) {
-          onSelect(isAfterWithOptions.clone().add(1, startOf));
-          return;
-        }
-      }
-      onSelect(isAfterOverflows ? value.clone().add(1, 'day') : value);
-    },
-    [isBeforeWithOptions, isBeforeOverflows, isAfterWithOptions, isAfterOverflows, startOf, onSelect],
-  );
-
-  const handleSelect = useCallback<NonNullable<AntDesignTimePickerProps['onSelect']>>(
-    (value) => {
-      applyMomentOptions(value);
-      performOnSelect(value);
-    },
-    [applyMomentOptions, performOnSelect],
-  );
-
-  const handleBlur = useCallback<NonNullable<AntDesignTimePickerProps['onBlur']>>(
-    (ev) => {
       if (onBlur) {
         onBlur(ev);
       }
-      const {currentTarget: inputEl} = ev;
-      const value = moment(inputEl.value.toLowerCase(), format);
-      if (!value.isValid()) {
-        return;
-      }
-      applyMomentOptions(value);
-      // Trigger onSelect on blur
-      if (!valueProp || value.toISOString() !== valueProp.toISOString()) {
-        performOnSelect(value);
-      }
     },
-    [applyMomentOptions, onBlur, performOnSelect, format, valueProp],
+    [onBlur, format, onChange],
   );
 
-  const handleChange = useCallback<NonNullable<AntDesignTimePickerProps['onChange']>>(
+  const handleChange = useCallback<NonNullable<TimePickerProps['onChange']>>(
     (value, timeString) => {
-      applyMomentOptions(value);
+      const nextValue = applyDateOptions(value);
       if (onChange) {
-        onChange(value, timeString);
+        onChange(nextValue, timeString);
       }
-      // Trigger onSelect when pressing enter
-      if (!value || !value.isValid()) {
-        return;
-      }
-      if (!valueProp || value.toISOString() !== valueProp.toISOString()) {
-        performOnSelect(value);
-      }
+      // // Trigger onSelect when pressing enter
+      // if (!value || !value.isValid()) {
+      //   return;
+      // }
+      // if (!valueProp || value.toISOString() !== valueProp.toISOString()) {
+      //   performOnSelect(value);
+      // }
     },
-    [applyMomentOptions, valueProp, onChange, performOnSelect],
+    [applyDateOptions, onChange],
   );
 
-  const lazyDisabledHours = useMemo<ReturnType<NonNullable<AntDesignTimePickerProps['disabledHours']>>>(() => {
+  const lazyDisabledHours = useMemo<ReturnType<NonNullable<TimePickerProps['disabledHours']>>>(() => {
     const values = disabledHours ? disabledHours() : [];
     // @NOTE non-utc support?
     const isDisabledInside = isBeforeOverflows && !isAfterOverflows;
     if (isDisabledInside) {
-      const [beforeHour, beforeMinutes] = [isBefore.hour(), isBefore.minutes()];
-      const [afterHour, afterMinutes] = [isAfter ? isAfter.hour() : 24, isAfter ? isAfter.minutes() : 0];
+      const [beforeHour, beforeMinutes] = [isBefore.hour(), isBefore.minute()];
+      const [afterHour, afterMinutes] = [isAfter ? isAfter.hour() : 24, isAfter ? isAfter.minute() : 0];
       values.push(
         ...integerArraySuite(
           beforeMinutes > 0 ? beforeHour + 1 : beforeHour,
@@ -157,30 +162,30 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
       return values;
     }
     if (isAfter) {
-      const [hour, minutes] = [isAfter.hour(), isAfter.minutes()];
+      const [hour, minutes] = [isAfter.hour(), isAfter.minute()];
       values.push(...integerArraySuite(0, minutes >= 59 ? hour : hour - 1));
     }
     if (isBefore) {
-      const [hour, minutes] = [isBefore.hour(), isBefore.minutes()];
+      const [hour, minutes] = [isBefore.hour(), isBefore.minute()];
       values.push(...integerArraySuite(minutes > 0 ? hour + 1 : hour, 23));
     }
     return values;
   }, [isBefore, isBeforeOverflows, isAfter, isAfterOverflows, disabledHours]);
-  const getDisabledHours = useCallback<NonNullable<AntDesignTimePickerProps['disabledHours']>>(
+  const getDisabledHours = useCallback<NonNullable<PickerTimeProps['disabledHours']>>(
     () => lazyDisabledHours,
     [lazyDisabledHours],
   );
-  const getDisabledMinutes = useCallback<NonNullable<AntDesignTimePickerProps['disabledMinutes']>>(
+  const getDisabledMinutes = useCallback<NonNullable<PickerTimeProps['disabledMinutes']>>(
     (selectedHour) => {
       const values = disabledMinutes ? disabledMinutes(selectedHour) : [];
       if (isAfter) {
-        const [hour, minutes] = [isAfter.hour(), isAfter.minutes()];
+        const [hour, minutes] = [isAfter.hour(), isAfter.minute()];
         if (selectedHour === hour) {
           values.push(...integerArraySuite(0, minutes));
         }
       }
       if (isBefore) {
-        const [hour, minutes] = [isBefore.hour(), isBefore.minutes()];
+        const [hour, minutes] = [isBefore.hour(), isBefore.minute()];
         if (selectedHour === hour) {
           values.push(...integerArraySuite(minutes, 59));
         }
@@ -191,7 +196,7 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
   );
 
   return (
-    <AntDesignTimePicker
+    <InternalTimePicker
       clearIcon={clearIcon}
       onSelect={handleSelect}
       onChange={handleChange}
@@ -199,7 +204,6 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
       disabledHours={getDisabledHours}
       disabledMinutes={getDisabledMinutes}
       value={valueProp}
-      // @ts-expect-error bad <AntDesignTimePicker /> typing
       format={format}
       {...applySizeProps('ant-picker', {size, className})}
       {...otherProps}

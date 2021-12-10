@@ -21,6 +21,7 @@
 ## Features
 
 - Adds several new sizes `x-small`, `x-large` and `xx-large` to most components
+- Uses [dayjs](https://github.com/iamkun/dayjs/) for picker by defaults
 - Adds a new `secondary` type for buttons
 - Adds `utc` mode to date-related pickers
 

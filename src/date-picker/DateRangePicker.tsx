@@ -1,20 +1,21 @@
 // @docs https://ant.design/components/date-picker
 // @source https://github.com/ant-design/ant-design/tree/master/components/date-picker
 
-import {DatePicker as AntDesignDatePicker} from 'antd';
-import {RangePickerProps as AntDesignDateRangePickerProps} from 'antd/lib/date-picker';
-import type {unitOfTime} from 'moment';
+import type {Dayjs, OpUnitType} from 'dayjs';
 import React, {FunctionComponent, useCallback} from 'react';
 import {applySizeProps, SizeType} from './../utils';
-import './style/date-picker.less';
+import {DatePicker as BaseDatePicker, EventValue, RangePickerProps as BaseRangePickerProps} from './Picker';
 
-const {RangePicker: AntDesignDateRangePicker} = AntDesignDatePicker;
+const {RangePicker: BaseDateRangePicker} = BaseDatePicker;
 
-export type DateRangePickerProps = Omit<AntDesignDateRangePickerProps, 'size'> & {
+export type DateRangePickerProps = Omit<BaseRangePickerProps, 'size'> & {
   size?: SizeType;
-  startOf?: unitOfTime.Base;
+  startOf?: OpUnitType;
   utc?: boolean;
 };
+
+type Defined<T> = T extends undefined ? never : T;
+export type DateRangePickerValue = Defined<DateRangePickerProps['value']>;
 
 export const DateRangePicker: FunctionComponent<DateRangePickerProps> = ({
   size,
@@ -24,43 +25,39 @@ export const DateRangePicker: FunctionComponent<DateRangePickerProps> = ({
   onChange,
   ...otherProps
 }) => {
-  const applyMomentOptions = useCallback(
-    (values: DateRangePickerProps['value']): DateRangePickerProps['value'] => {
+  const applyDateOptions = useCallback(
+    (values: DateRangePickerValue): DateRangePickerValue => {
       if (!values) {
         return values;
       }
-      values.forEach((value) => {
+      return values.map((nextValue) => {
+        let value = nextValue;
         if (!value) {
           return;
         }
         if (utc) {
-          value.utc(true);
+          value = value.utc(true);
         }
         if (startOf) {
-          value.startOf(startOf);
+          value = value.startOf(startOf);
         }
-      });
-
-      return values;
+        return value;
+      }) as [EventValue<Dayjs>, EventValue<Dayjs>];
     },
     [startOf, utc],
   );
 
   const handleChange = useCallback<NonNullable<DateRangePickerProps['onChange']>>(
-    (value, timeString) => {
-      applyMomentOptions(value);
+    (values, timeString) => {
+      const nextValues = applyDateOptions(values);
       if (onChange) {
-        onChange(value, timeString);
+        onChange(nextValues, timeString);
       }
     },
-    [applyMomentOptions, onChange],
+    [applyDateOptions, onChange],
   );
 
   return (
-    <AntDesignDateRangePicker
-      onChange={handleChange}
-      {...applySizeProps('ant-picker', {size, className})}
-      {...otherProps}
-    />
+    <BaseDateRangePicker onChange={handleChange} {...applySizeProps('ant-picker', {size, className})} {...otherProps} />
   );
 };

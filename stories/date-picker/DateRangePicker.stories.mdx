@@ -1,0 +1,40 @@
+import {Meta, Story, Canvas, ArgsTable} from '@storybook/addon-docs';
+import {DateRangePicker, meta, Default, Sizes, StartOfOption, UtcOption} from './DateRangePicker.story';
+
+# DateRangePicker
+
+<Meta title={meta.title} component={meta.component} argTypes={meta.argTypes} args={meta.args} />
+
+## Default
+
+<Canvas>
+  <Story name="Default">{Default}</Story>
+</Canvas>
+
+<ArgsTable of={DateRangePicker} story="^" include={['size', 'utc', 'startOf']} />
+
+## Universal time
+
+A new prop `utc` allows you to always manipulate [Coordinated Universal Time](https://en.wikipedia.org/wiki/Coordinated_Universal_Time) values:
+
+<Canvas>
+  <Story name="UtcOption">{UtcOption}</Story>
+</Canvas>
+
+## Start of time
+
+A new prop `startOf` allows you to sanitize your dates using moment [Start of Time](https://momentjs.com/docs/#/manipulating/start-of/) helper:
+
+**Breaking change** We did set the default value to `day`
+
+<Canvas>
+  <Story name="StartOf">{StartOfOption}</Story>
+</Canvas>
+
+## Sizes
+
+New sizes are available: `x-small`, `x-large` and `xx-large`:
+
+<Canvas>
+  <Story name="Sizes">{Sizes}</Story>
+</Canvas>

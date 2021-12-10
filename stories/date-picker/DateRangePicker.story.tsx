@@ -1,8 +1,9 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import {DatePicker, DatePickerProps} from '../../src/date-picker';
+import dayjs, {Dayjs} from 'dayjs';
+// import moment, {Moment} from 'moment';
+import {DateRangePicker, DateRangePickerProps} from '../../src/date-picker';
 import {
   argValueExtractor,
-  argValueInjector,
   declineTemplate,
   labelExtractor,
   sizeTemplate,
@@ -10,21 +11,21 @@ import {
   titlePrefix,
   withLocalState,
 } from '../utils';
-export {DatePicker};
+export {DateRangePicker};
 
-const startOfOptions: DatePickerProps['startOf'][] = ['day', 'hour', 'minute', 'second'];
+const startOfOptions: DateRangePickerProps['startOf'][] = ['day', 'hour', 'minute', 'second'];
 
-export const meta: ComponentMeta<typeof DatePicker> = {
-  title: `${titlePrefix}DatePicker`,
-  component: DatePicker,
+export const meta: ComponentMeta<typeof DateRangePicker> = {
+  title: `${titlePrefix}DateRangePicker`,
+  component: DateRangePicker,
   argTypes: {
     ...storybookSizeArgTypes,
-    value: {
-      control: {type: 'date'},
-    },
-    placeholder: {
-      control: {type: 'text'},
-    },
+    // value: {
+    //   control: {type: 'date'},
+    // },
+    // placeholder: {
+    //   control: {type: 'text'},
+    // },
     format: {
       control: {type: 'text'},
     },
@@ -38,8 +39,8 @@ export const meta: ComponentMeta<typeof DatePicker> = {
     onChange: {action: 'changed'},
   },
   args: {
-    // value: dayjs(),
-    placeholder: 'Date',
+    // value: [dayjs(), dayjs()],
+    placeholder: ['From', 'Until'],
     format: 'YYYY-MM-DD',
     utc: false,
   },
@@ -47,11 +48,24 @@ export const meta: ComponentMeta<typeof DatePicker> = {
 
 // export default meta;
 
-const DefaultTemplate: ComponentStory<typeof DatePicker> = withLocalState(DatePicker, {
-  argValueInjector,
-  argValueExtractor,
-  labelExtractor,
+const DefaultTemplate: ComponentStory<typeof DateRangePicker> = withLocalState(DateRangePicker, {
+  // argValueInjector: (value: number) => [dayjs(value), dayjs(value)],
+  argValueExtractor: (value?: [Dayjs, Dayjs]) => {
+    if (!value) {
+      return value;
+    }
+    const [from, until] = value;
+    return [argValueExtractor(from), argValueExtractor(until)];
+  },
+  labelExtractor: (value?: [Dayjs, Dayjs]) => {
+    if (!value) {
+      return typeof value;
+    }
+    const [from, until] = value;
+    return `${labelExtractor(from)} -> ${labelExtractor(until)}`;
+  },
 });
+
 export const Default = DefaultTemplate.bind({});
 
 const SizeTemplate = sizeTemplate(DefaultTemplate);

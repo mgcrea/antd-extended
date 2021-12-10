@@ -1,17 +1,19 @@
 // @docs https://ant.design/components/date-picker
 // @source https://github.com/ant-design/ant-design/tree/master/components/date-picker
 
-import {DatePicker as AntDesignDatePicker} from 'antd';
-import {DatePickerProps as AntDesignDatePickerProps} from 'antd/lib/date-picker';
-import {unitOfTime} from 'moment';
+import type {OpUnitType} from 'dayjs';
 import React, {FunctionComponent, useCallback} from 'react';
 import {applySizeProps, SizeType} from './../utils';
+import {DatePicker as BaseDatePicker, DatePickerProps as BaseDatePickerProps} from './Picker';
 
-export type DatePickerProps = Omit<AntDesignDatePickerProps, 'size'> & {
+export type DatePickerProps = Omit<BaseDatePickerProps, 'size'> & {
   size?: SizeType;
-  startOf?: unitOfTime.Base;
+  startOf?: OpUnitType;
   utc?: boolean;
 };
+
+type Defined<T> = T extends undefined ? never : T;
+export type DatePickerValue = Defined<DatePickerProps['value']>;
 
 export const DatePicker: FunctionComponent<DatePickerProps> = ({
   size,
@@ -21,16 +23,17 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
   onChange,
   ...otherProps
 }) => {
-  const applyMomentOptions = useCallback(
-    (value: DatePickerProps['value']): DatePickerProps['value'] => {
+  const applyDateOptions = useCallback(
+    (nextValue: DatePickerValue): DatePickerValue => {
+      let value = nextValue;
       if (!value) {
         return value;
       }
       if (utc) {
-        value.utc(true);
+        value = value.utc(true);
       }
       if (startOf) {
-        value.startOf(startOf);
+        value = value.startOf(startOf);
       }
       return value;
     },
@@ -39,15 +42,15 @@ export const DatePicker: FunctionComponent<DatePickerProps> = ({
 
   const handleChange = useCallback<NonNullable<DatePickerProps['onChange']>>(
     (value, timeString) => {
-      applyMomentOptions(value);
+      const nextValue = applyDateOptions(value);
       if (onChange) {
-        onChange(value, timeString);
+        onChange(nextValue, timeString);
       }
     },
-    [applyMomentOptions, onChange],
+    [applyDateOptions, onChange],
   );
 
   return (
-    <AntDesignDatePicker onChange={handleChange} {...applySizeProps('ant-picker', {size, className})} {...otherProps} />
+    <BaseDatePicker onChange={handleChange} {...applySizeProps('ant-picker', {size, className})} {...otherProps} />
   );
 };
