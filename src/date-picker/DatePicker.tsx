@@ -5,6 +5,8 @@ import type {OpUnitType} from 'dayjs';
 import React, {FunctionComponent, useCallback} from 'react';
 import {applySizeProps, SizeType} from './../utils';
 import {DatePicker as BaseDatePicker, DatePickerProps as BaseDatePickerProps} from './Picker';
+import 'antd/lib/date-picker/style/index.less';
+import './style/date-picker.less';
 
 export type DatePickerProps = Omit<BaseDatePickerProps, 'size'> & {
   size?: SizeType;

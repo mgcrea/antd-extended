@@ -5,6 +5,7 @@ import type {Dayjs, OpUnitType} from 'dayjs';
 import React, {FunctionComponent, useCallback} from 'react';
 import {applySizeProps, SizeType} from './../utils';
 import {DatePicker as BaseDatePicker, EventValue, RangePickerProps as BaseRangePickerProps} from './Picker';
+import 'antd/lib/date-picker/style/index.less';
 
 const {RangePicker: BaseDateRangePicker} = BaseDatePicker;
 

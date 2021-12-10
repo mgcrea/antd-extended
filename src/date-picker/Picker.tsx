@@ -11,6 +11,8 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 import utc from 'dayjs/plugin/utc';
 import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
 export type {EventValue} from 'rc-picker/lib/interface';
+import 'antd/lib/date-picker/style/index.less';
+import 'antd/lib/time-picker/style/index.less';
 
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);

@@ -6,6 +6,8 @@ import {OpUnitType} from 'dayjs';
 import React, {FunctionComponent, useCallback, useMemo, useRef} from 'react';
 import {DatePicker, PickerTimeProps} from './../date-picker/Picker';
 import {applySizeProps, SizeType} from './../utils';
+import 'antd/lib/time-picker/style/index.less';
+import './style/time-picker.less';
 
 const {TimePicker: InternalTimePicker} = DatePicker;
 

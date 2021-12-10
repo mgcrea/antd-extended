@@ -4,6 +4,7 @@
 import {applySizeProps, SizeType} from './../utils';
 import React, {FunctionComponent} from 'react';
 import {DatePicker, RangePickerTimeProps} from './../date-picker/Picker';
+import 'antd/lib/time-picker/style/index.less';
 
 const {RangePicker: InternalRangePicker} = DatePicker;
 
