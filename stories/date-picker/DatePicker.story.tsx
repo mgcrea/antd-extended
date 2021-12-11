@@ -1,10 +1,10 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 import {DatePicker, DatePickerProps} from '../../src/date-picker';
 import {
-  argValueExtractor,
-  argValueInjector,
+  dateArgValueExtractor,
+  dateArgValueInjector,
+  dateLabelExtractor,
   declineTemplate,
-  labelExtractor,
   sizeTemplate,
   storybookSizeArgTypes,
   titlePrefix,
@@ -45,12 +45,12 @@ export const meta: ComponentMeta<typeof DatePicker> = {
   },
 };
 
-// export default meta;
+export default meta;
 
 const DefaultTemplate: ComponentStory<typeof DatePicker> = withLocalState(DatePicker, {
-  argValueInjector,
-  argValueExtractor,
-  labelExtractor,
+  argValueInjector: dateArgValueInjector,
+  argValueExtractor: dateArgValueExtractor,
+  labelExtractor: dateLabelExtractor,
 });
 export const Default = DefaultTemplate.bind({});
 
@@ -64,10 +64,4 @@ const StartOfOptionTemplate = declineTemplate(DefaultTemplate, {
 export const StartOfOption = StartOfOptionTemplate.bind({});
 
 const UtcOptionTemplate = declineTemplate(DefaultTemplate, {name: 'utc', options: [true, false], layout: 'horizontal'});
-// const UtcOptionTemplate = (props) => createElement(DatePicker, props);
-// const UtcOptionTemplate = withLocalState(DatePicker, {
-//   argValueInjector: (value: number) => moment(value),
-//   argValueExtractor: (value: Moment) => value.toDate().getTime(),
-//   // labelExtractor: (value: Moment) => value.toISOString(),
-// });
 export const UtcOption = UtcOptionTemplate.bind({});

@@ -24,7 +24,7 @@ export const meta: ComponentMeta<typeof Button> = {
   },
 };
 
-// export default meta;
+export default meta;
 
 const DefaultTemplate: FunctionComponent<ButtonProps> = (props) => <Button {...props} />;
 export const Default = DefaultTemplate.bind({});

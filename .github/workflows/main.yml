@@ -31,6 +31,8 @@ jobs:
         run: npm run prettycheck
       - name: TypeScript 🔍
         run: npm run typecheck
+      - name: Jest 🔍
+        run: npm run spec
   build:
     runs-on: ubuntu-latest
     strategy:

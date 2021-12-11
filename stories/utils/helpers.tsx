@@ -68,10 +68,11 @@ export function withLocalState<T extends JSXElementConstructor<P>, P extends {[s
 type DeclineTemplateOptions = StoryContainerProps & {
   name: string;
   options: any[];
+  extraProps?: {[s: string]: any};
 };
 export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[s: string]: any}>(
   template: ComponentStory<T>,
-  {name, options, ...otherProps}: DeclineTemplateOptions,
+  {name, options, extraProps, ...otherProps}: DeclineTemplateOptions,
 ) {
   const WrappedStory: ComponentStory<T> = (props, context) => {
     return (
@@ -80,7 +81,7 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
           return (
             <div key={`${value}`}>
               <Label name={name} value={value} />
-              {template({...props, [name]: value}, context)}
+              {template({...props, ...extraProps, [name]: value}, context)}
             </div>
           );
         })}

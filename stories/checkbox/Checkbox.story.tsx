@@ -21,7 +21,7 @@ export const meta: ComponentMeta<typeof CheckboxGroup> = {
   },
 };
 
-// export default meta;
+export default meta;
 
 const options = [
   {label: 'Apple', value: 'apple'},

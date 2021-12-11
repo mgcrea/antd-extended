@@ -1,11 +1,9 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
-import dayjs, {Dayjs} from 'dayjs';
-// import moment, {Moment} from 'moment';
 import {DateRangePicker, DateRangePickerProps} from '../../src/date-picker';
 import {
-  argValueExtractor,
+  dateRangeArgValueExtractor,
+  dateRangeLabelExtractor,
   declineTemplate,
-  labelExtractor,
   sizeTemplate,
   storybookSizeArgTypes,
   titlePrefix,
@@ -46,24 +44,12 @@ export const meta: ComponentMeta<typeof DateRangePicker> = {
   },
 };
 
-// export default meta;
+export default meta;
 
 const DefaultTemplate: ComponentStory<typeof DateRangePicker> = withLocalState(DateRangePicker, {
   // argValueInjector: (value: number) => [dayjs(value), dayjs(value)],
-  argValueExtractor: (value?: [Dayjs, Dayjs]) => {
-    if (!value) {
-      return value;
-    }
-    const [from, until] = value;
-    return [argValueExtractor(from), argValueExtractor(until)];
-  },
-  labelExtractor: (value?: [Dayjs, Dayjs]) => {
-    if (!value) {
-      return typeof value;
-    }
-    const [from, until] = value;
-    return `${labelExtractor(from)} -> ${labelExtractor(until)}`;
-  },
+  argValueExtractor: dateRangeArgValueExtractor,
+  labelExtractor: dateRangeLabelExtractor,
 });
 
 export const Default = DefaultTemplate.bind({});

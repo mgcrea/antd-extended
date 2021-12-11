@@ -1,12 +1,11 @@
 // @docs https://ant.design/components/time-picker
 // @source https://github.com/ant-design/ant-design/tree/master/components/time-picker
 
-import {CloseCircleFilled} from '@ant-design/icons';
-import {OpUnitType} from 'dayjs';
-import React, {FunctionComponent, useCallback, useMemo, useRef} from 'react';
+import 'antd/lib/time-picker/style/index.less';
+import dayjs, {OpUnitType} from 'dayjs';
+import React, {FunctionComponent, useCallback, useEffect, useMemo, useRef} from 'react';
 import {DatePicker, PickerTimeProps} from './../date-picker/Picker';
 import {applySizeProps, SizeType} from './../utils';
-import 'antd/lib/time-picker/style/index.less';
 import './style/time-picker.less';
 
 const {TimePicker: InternalTimePicker} = DatePicker;
@@ -32,25 +31,14 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
   value: valueProp,
   disabledHours,
   disabledMinutes,
-  format = 'HH:mm:ss',
+  format,
   startOf = 'second',
-  isBefore,
-  isAfter,
+  isBefore: isBeforeProp,
+  isAfter: isAfterProp,
   utc,
   ...otherProps
 }) => {
   const lastSelectedValue = useRef<TimePickerValue>(valueProp || null);
-  const handleReset = useCallback(() => {
-    if (onSelect) {
-      onSelect(null);
-    }
-  }, [onSelect]);
-  const clearIcon = useMemo<NonNullable<PickerTimeProps['clearIcon']>>(
-    () => <CloseCircleFilled onClick={handleReset} role="button" />,
-    [handleReset],
-  );
-  const isBeforeOverflows = utc && isBefore && isBefore.date() > 1;
-  const isAfterOverflows = utc && isAfter && isAfter.date() > 1;
 
   const applyDateOptions = useCallback(
     (nextValue: TimePickerValue): TimePickerValue => {
@@ -71,79 +59,71 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
     [startOf, utc],
   );
 
-  // const isBeforeWithOptions = useMemo<TimePickerValue>(
-  //   () => (isBefore ? applyDateOptions(dayjs(isBefore).clone()) : null),
-  //   [applyDateOptions, isBefore],
-  // );
-  // const isAfterWithOptions = useMemo<TimePickerValue>(
-  //   () => (isAfter ? applyDateOptions(dayjs(isAfter).clone()) : null),
-  //   [applyDateOptions, isAfter],
-  // );
+  const isBefore = useMemo<TimePickerValue>(
+    () => (isBeforeProp ? applyDateOptions(dayjs(isBeforeProp).clone()) : null),
+    [applyDateOptions, isBeforeProp],
+  );
+  const isAfter = useMemo<TimePickerValue>(
+    () => (isAfterProp ? applyDateOptions(dayjs(isAfterProp).clone()) : null),
+    [applyDateOptions, isAfterProp],
+  );
+  const isBeforeOverflows = utc && isBefore && isBefore.date() > 1;
+  const isAfterOverflows = utc && isAfter && isAfter.date() > 1;
 
-  // const performOnSelect = useCallback<NonNullable<TimePickerProps['onSelect']>>(
-  //   (value) => {
-  //     if (!onSelect) {
-  //       return;
-  //     }
-  //     if (isBeforeWithOptions) {
-  //       if (value && value.isSameOrAfter(isBeforeWithOptions)) {
-  //         onSelect(isBeforeWithOptions.clone().subtract(1, startOf));
-  //         return;
-  //       }
-  //     }
-  //     if (isAfterWithOptions && !isBeforeOverflows) {
-  //       if (value && value.isSameOrBefore(isAfterWithOptions)) {
-  //         onSelect(isAfterWithOptions.clone().add(1, startOf));
-  //         return;
-  //       }
-  //     }
-  //     const nextValue = value && isAfterOverflows ? value.clone().add(1, 'day') : value;
-  //     onSelect(nextValue);
-  //   },
-  //   [isBeforeWithOptions, isBeforeOverflows, isAfterWithOptions, isAfterOverflows, startOf, onSelect],
-  // );
+  const performOnSelect = useCallback<NonNullable<TimePickerProps['onSelect']>>(
+    (value) => {
+      if (!onSelect) {
+        return;
+      }
+      if (isBefore) {
+        if (value && value.isSameOrAfter(isBefore)) {
+          onSelect(isBefore.clone().subtract(1, startOf));
+          return;
+        }
+      }
+      if (isAfter && !isBeforeOverflows) {
+        if (value && value.isSameOrBefore(isAfter)) {
+          onSelect(isAfter.clone().add(1, startOf));
+          return;
+        }
+      }
+      const nextValue = value && isAfterOverflows ? value.clone().add(1, 'day') : value;
+      onSelect(nextValue);
+    },
+    [isBefore, isBeforeOverflows, isAfter, isAfterOverflows, startOf, onSelect],
+  );
 
   const handleSelect = useCallback<NonNullable<TimePickerProps['onSelect']>>(
-    (value) => {
+    (nextValue) => {
+      const value = applyDateOptions(nextValue);
       lastSelectedValue.current = value;
-      if (onSelect) {
-        onSelect(value);
-      }
-      // const value = applyDateOptions(nextValue);
-      // performOnSelect(value);
+      performOnSelect(value);
     },
-    [onSelect],
+    [performOnSelect, applyDateOptions],
   );
 
   const handleBlur = useCallback<NonNullable<TimePickerProps['onBlur']>>(
     (ev) => {
+      if (onBlur) {
+        onBlur(ev);
+      }
       const {current: value} = lastSelectedValue;
       if (!value) {
         return;
       }
-      if (onChange) {
+      if (onChange && value.toISOString() !== valueProp?.toISOString()) {
         onChange(value, value.format(`${format}`));
       }
-      if (onBlur) {
-        onBlur(ev);
-      }
     },
-    [onBlur, format, onChange],
+    [onBlur, onChange, format, valueProp],
   );
 
   const handleChange = useCallback<NonNullable<TimePickerProps['onChange']>>(
-    (value, timeString) => {
-      const nextValue = applyDateOptions(value);
+    (nextValue, timeString) => {
+      const value = applyDateOptions(nextValue);
       if (onChange) {
-        onChange(nextValue, timeString);
+        onChange(value, timeString);
       }
-      // // Trigger onSelect when pressing enter
-      // if (!value || !value.isValid()) {
-      //   return;
-      // }
-      // if (!valueProp || value.toISOString() !== valueProp.toISOString()) {
-      //   performOnSelect(value);
-      // }
     },
     [applyDateOptions, onChange],
   );
@@ -199,7 +179,6 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
 
   return (
     <InternalTimePicker
-      clearIcon={clearIcon}
       onSelect={handleSelect}
       onChange={handleChange}
       onBlur={handleBlur}

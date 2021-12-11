@@ -11,7 +11,9 @@ export const meta: ComponentMeta<typeof Icon> = {
     ...storybookSizeArgTypes,
     onChange: {action: 'changed'},
   },
-} as ComponentMeta<typeof Icon>;
+};
+
+export default meta;
 
 const DefaultTemplate: ComponentStory<typeof Icon> = (props) => <Icon {...props} />;
 export const CircleOutlined = DefaultTemplate.bind({});

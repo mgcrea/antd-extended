@@ -1,20 +1,23 @@
 // @docs https://ant.design/components/time-picker
 
 import {ComponentMeta, ComponentStory} from '@storybook/react';
+import dayjs from 'dayjs';
 import React from 'react';
-import {TimePicker} from './../../src/time-picker';
+import {TimePicker} from '../../src/time-picker';
+// import {TimePicker} from 'antd';
 import {
-  argValueExtractor,
-  argValueInjector,
+  dateArgValueExtractor,
+  dateArgValueInjector,
   declineTemplate,
-  labelExtractor,
+  dateLabelExtractor,
   sizeTemplate,
   storybookSizeArgTypes,
   titlePrefix,
   withLocalState,
-} from './../utils';
+} from '../utils';
+export {TimePicker};
 
-export default {
+export const meta: ComponentMeta<typeof TimePicker> = {
   title: `${titlePrefix}TimePicker`,
   component: TimePicker,
   argTypes: {
@@ -37,17 +40,17 @@ export default {
     },
   },
   args: {
-    placeholder: 'Start time',
-    format: 'HH[h]mm',
+    placeholder: 'Time',
+    format: 'HH:mm',
     utc: false,
   },
-  parameters: {actions: {argTypesRegex: '^on.*'}},
-} as ComponentMeta<typeof TimePicker>;
+};
 
 const DefaultTemplate: ComponentStory<typeof TimePicker> = withLocalState((props) => <TimePicker {...props} />, {
-  argValueInjector,
-  argValueExtractor,
-  labelExtractor,
+  argValueInjector: dateArgValueInjector,
+  argValueExtractor: dateArgValueExtractor,
+  labelExtractor: dateLabelExtractor,
+  trigger: 'onChange',
 });
 export const Default = DefaultTemplate.bind({});
 
@@ -59,3 +62,17 @@ export const StartOfOption = StartOfOptionTemplate.bind({});
 
 const UtcOptionTemplate = declineTemplate(DefaultTemplate, {name: 'utc', options: [true, false]});
 export const UtcOption = UtcOptionTemplate.bind({});
+
+const IsBeforeOptionTemplate = declineTemplate(DefaultTemplate, {
+  name: 'isBefore',
+  options: [dayjs('1970-01-01T02:02:00.000Z').utc()],
+  // extraProps: {utc: true},
+});
+export const IsBeforeOption = IsBeforeOptionTemplate.bind({});
+
+const IsAfterOptionTemplate = declineTemplate(DefaultTemplate, {
+  name: 'isAfter',
+  options: [dayjs('1970-01-01T02:02:00.000Z').utc()],
+  // extraProps: {utc: true},
+});
+export const IsAfterOption = IsAfterOptionTemplate.bind({isAfter: '1970-01-01T02:02:00.000Z'});
