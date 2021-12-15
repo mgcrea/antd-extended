@@ -1,4 +1,4 @@
-// @cli y jest src/antd/components/time-picker/TimePicker.test.tsx --watch --coverage --collectCoverageOnlyFrom=src/antd/components/time-picker/TimePicker.tsx
+// @cli npx jest src/antd/components/time-picker/TimePicker.test.tsx --watch --coverage --collectCoverageOnlyFrom=src/antd/components/time-picker/TimePicker.tsx
 
 import dayjs from 'dayjs';
 import React from 'react';

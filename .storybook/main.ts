@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 const vitePluginImp = require('vite-plugin-imp');
 const path = require('path');
 

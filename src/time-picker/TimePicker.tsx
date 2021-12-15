@@ -3,9 +3,9 @@
 
 import 'antd/lib/time-picker/style/index.less';
 import dayjs, {OpUnitType} from 'dayjs';
-import React, {FunctionComponent, useCallback, useEffect, useMemo, useRef} from 'react';
+import React, {FunctionComponent, useCallback, useMemo, useRef} from 'react';
 import {DatePicker, PickerTimeProps} from './../date-picker/Picker';
-import {applySizeProps, SizeType} from './../utils';
+import {applySizeProps, integerArraySuite, SizeType} from './../utils';
 import './style/time-picker.less';
 
 const {TimePicker: InternalTimePicker} = DatePicker;
@@ -130,7 +130,6 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
 
   const lazyDisabledHours = useMemo<ReturnType<NonNullable<TimePickerProps['disabledHours']>>>(() => {
     const values = disabledHours ? disabledHours() : [];
-    // @NOTE non-utc support?
     const isDisabledInside = isBeforeOverflows && !isAfterOverflows;
     if (isDisabledInside) {
       const [beforeHour, beforeMinutes] = [isBefore.hour(), isBefore.minute()];
@@ -190,11 +189,4 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
       {...otherProps}
     />
   );
-};
-
-const integerArraySuite = (from: number, to: number): number[] => {
-  if (from > to) {
-    return [];
-  }
-  return Array.from(Array(to - from + 1).keys()).map((value) => value + from);
 };
