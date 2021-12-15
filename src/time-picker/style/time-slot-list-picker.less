@@ -1,0 +1,27 @@
+@import (reference) '../../style/themes/default';
+
+.ant-slot-list-picker {
+  display: inline-flex;
+  > .ant-row {
+    display: inline-flex;
+    transition: margin 0.2s;
+    align-items: center;
+    &:not(:last-of-type) {
+      margin-bottom: 1.5em;
+    }
+  }
+  &-index {
+    margin-right: 1em;
+    color: @text-color-secondary;
+  }
+  &-add-slot {
+    color: @success-color;
+    font-size: 20px;
+    margin-left: 0.5em;
+  }
+  &-delete-slot {
+    color: @error-color;
+    font-size: 20px;
+    margin-left: 0.5em;
+  }
+}

@@ -1,6 +1,8 @@
 import {ArrowRightOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import React, {FunctionComponent, HTMLProps, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {classNames} from '../utils';
+import './style/time-slot-picker.less';
 import {TimePicker, TimePickerProps} from './TimePicker';
 
 export type TimeSlotPickerValue = [TimePickerProps['value'], TimePickerProps['value']];
@@ -86,7 +88,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
   }, [allowOverflow, fromValue, isAfter]);
 
   return (
-    <div style={style} className={className}>
+    <div style={style} className={classNames('ant-slot-picker', className)}>
       <TimePicker
         placeholder={placeholder ? placeholder[0] : undefined}
         style={inputStyle}
@@ -97,7 +99,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
         isAfter={isAfter}
         {...otherProps}
       />
-      <span style={{margin: '0 1em'}}>
+      <span className="ant-slot-picker-separator">
         <ArrowRightOutlined />
       </span>
       <TimePicker
@@ -110,7 +112,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
         startOf={startOf}
         {...otherProps}
       />
-      {doesOverflow ? <span style={{margin: '0 0 0 .5em'}}>{overflowLabel}</span> : null}
+      {doesOverflow ? <span className="ant-slot-picker-overflow">{overflowLabel}</span> : null}
     </div>
   );
 };
