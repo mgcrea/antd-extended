@@ -28,7 +28,7 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
   const [values, setValues] = useState<TimeSlotListPickerValue>(valueProp);
   const [extraRows, setExtraRows] = useState<string[]>(values.slice(1).map(() => uniqueId('row_')));
 
-  const handleSelectForIndex = useCallback(
+  const handleChangeForIndex = useCallback(
     (value: TimeSlotPickerValue, index: number) => {
       setValues((values) => {
         values[index] = value;
@@ -46,15 +46,15 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
   );
 
   // @NOTE required to prevent infinite onChange loop when handler ref is broken
-  const {current: cachedOnSelectHandlers} = useRef<Map<number, TimeSlotPickerProps['onSelect']>>(new Map());
-  const getOnSelectHandlerForIndex = useCallback(
+  const {current: cachedOnSelectHandlers} = useRef<Map<number, TimeSlotPickerProps['onChange']>>(new Map());
+  const getOnChangeHandlerForIndex = useCallback(
     (index: number) => {
       if (!cachedOnSelectHandlers.has(index)) {
-        cachedOnSelectHandlers.set(index, (value) => handleSelectForIndex(value, index));
+        cachedOnSelectHandlers.set(index, (value) => handleChangeForIndex(value, index));
       }
       return cachedOnSelectHandlers.get(index);
     },
-    [handleSelectForIndex, cachedOnSelectHandlers],
+    [handleChangeForIndex, cachedOnSelectHandlers],
   );
   // @TODO handle spread (24h max), reduce min?
   const {current: cachedIsAfterValues} = useRef<Map<number, TimeSlotPickerProps['isAfter']>>(new Map());
@@ -122,15 +122,12 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
       }),
     [values],
   );
-  // useEffect(() => {
-  //   console.log(JSON.stringify({values}));
-  // }, [values]);
 
   return (
     <div style={style} className={classNames('ant-slot-list-picker', className)}>
       <div className="ant-row">
         <span className="ant-slot-list-picker-index">#1</span>
-        <TimeSlotPicker onSelect={getOnSelectHandlerForIndex(0)} value={values[0]} {...otherProps} />
+        <TimeSlotPicker onChange={getOnChangeHandlerForIndex(0)} value={values[0]} {...otherProps} />
         {canAddSlot && extraRows.length === 0 ? (
           <Tooltip title="Ajouter plage">
             <PlusCircleFilled onClick={handleAddRow} className="ant-slot-list-picker-add-slot" />
@@ -141,7 +138,7 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
         <div className="ant-row" key={value}>
           <span className="ant-slot-list-picker-index">#{index + 2}</span>
           <TimeSlotPicker
-            onSelect={getOnSelectHandlerForIndex(index + 1)}
+            onChange={getOnChangeHandlerForIndex(index + 1)}
             value={values[index + 1]}
             isBefore={getIsBeforeForIndex(index + 1)}
             isAfter={getIsAfterForIndex(index + 1)}

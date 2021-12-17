@@ -1,7 +1,7 @@
 import {ArrowRightOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import React, {FunctionComponent, HTMLProps, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {classNames} from '../utils';
+import {classNames, useDebugEffect} from '../utils';
 import './style/time-slot-picker.less';
 import {TimePicker, TimePickerProps} from './TimePicker';
 
@@ -37,18 +37,19 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
   const isDirty = useRef<boolean>(false);
   const [fromValue, setFromValue] = useState<TimePickerProps['value']>(valueProp ? valueProp[0] : undefined);
   const [toValue, setToValue] = useState<TimePickerProps['value']>(valueProp ? valueProp[1] : undefined);
-  const values = useMemo<TimeSlotPickerValue>(() => [fromValue, toValue], [fromValue, toValue]);
+  // const values = useMemo<TimeSlotPickerValue>(() => [fromValue, toValue], [fromValue, toValue]);
 
-  useEffect(() => {
-    if (!isDirty.current) {
-      return;
-    }
-    // logDate(values);
-    const hasInvalidValues = values.some((value) => !(value && value.isValid()));
-    if (onChange && !hasInvalidValues) {
-      onChange(values);
-    }
-  }, [onChange, values]);
+  const handleChange = useCallback(
+    ([fromValue, toValue]) => {
+      const hasInvalidValues = [fromValue, toValue].some((value) => !(value && value.isValid()));
+      if (onChange && !hasInvalidValues) {
+        onChange([fromValue, toValue]);
+      }
+    },
+    [onChange],
+  );
+
+  useDebugEffect({fromValue, toValue, onChange});
 
   const doesOverflow = useMemo<boolean>(() => {
     if (!fromValue || !toValue) {
@@ -57,16 +58,19 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
     return toValue.toDate().getTime() <= fromValue.toDate().getTime() || toValue.date() !== fromValue.date();
   }, [fromValue, toValue]);
 
-  const handleFromChange = useCallback((fromValue) => {
-    isDirty.current = true;
-    // logDate({fromValue});
-    setFromValue(fromValue);
-  }, []);
+  const handleFromChange = useCallback(
+    (fromValue) => {
+      isDirty.current = true;
+      // logDate({fromValue});
+      setFromValue(fromValue);
+      handleChange([fromValue, toValue]);
+    },
+    [toValue, handleChange],
+  );
 
   const handleToChange = useCallback(
     (toValue) => {
       isDirty.current = true;
-      console.warn({toValue});
       const willOverflow = fromValue && toValue && toValue.toDate().getTime() <= fromValue.toDate().getTime();
       // @NOTE ux vs disabled?
       if (!allowOverflow && willOverflow) {
@@ -76,8 +80,9 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
         // setToValue(allowOverflow && willOverflow ? toValue.clone().add(1, 'day') : toValue);
         setToValue(toValue);
       }
+      handleChange([fromValue, toValue]);
     },
-    [allowOverflow, startOf, fromValue],
+    [allowOverflow, startOf, fromValue, handleChange],
   );
 
   const toIsAfter = useMemo(() => {
