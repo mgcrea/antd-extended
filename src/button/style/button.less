@@ -6,6 +6,18 @@
 .@{btn-prefix-cls} {
   transition: all 0.15s;
 
+  // @NOTE https://github.com/ant-design/ant-design/issues/32952
+  && {
+    flex: none !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  > .anticon + span {
+    margin-left: 0px;
+  }
+
   &.@{btn-prefix-cls}-xs {
     .button-size(@btn-height-xs; @btn-padding-horizontal-xs; @btn-font-size-xs; @border-radius-base);
   }
