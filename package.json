@@ -15,7 +15,8 @@
     "spec": "jest --runInBand",
     "test": "npm run lint && npm run prettycheck && npm run typecheck",
     "docs": "build-storybook -o ./docs",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
     "@ant-design/icons": ">=4.7",
@@ -44,9 +45,9 @@
     "@typescript-eslint/parser": "^5.8.1",
     "@vitejs/plugin-react": "^1.1.3",
     "antd": "^4.18.2",
-    "eslint": "^8.5.0",
+    "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-jest": "^25.3.3",
+    "eslint-plugin-jest": "^25.3.4",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
