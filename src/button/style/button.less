@@ -35,14 +35,14 @@
   }
 
   &.@{btn-prefix-cls}-secondary {
-    .button-variant-other(white; @secondary-color; @secondary-color);
+    .button-variant-other(white; @btn-secondary-bg; @btn-secondary-bg);
     &:hover,
     &:focus,
     &:active {
       text-decoration: none;
-      color: white;
-      background: @secondary-color;
-      border-color: @secondary-color;
+      color: @btn-secondary-color;
+      background: @btn-secondary-bg;
+      border-color: @btn-secondary-bg;
     }
   }
 }
