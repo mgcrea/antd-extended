@@ -1,14 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {useArgs} from '@storybook/addons';
 import {ArgTypes, ComponentStory} from '@storybook/react';
-import React, {
-  ComponentProps,
-  createElement,
-  FunctionComponent,
-  JSXElementConstructor,
-  useEffect,
-  useState,
-} from 'react';
+import React, {ComponentProps, createElement, JSXElementConstructor, useEffect, useState} from 'react';
 import {Label, StoryContainer, StoryContainerProps} from './components';
 import {storybookSizeOptions} from './size';
 
@@ -79,7 +72,7 @@ export function declineTemplate<T extends JSXElementConstructor<P>, P extends {[
       <StoryContainer {...otherProps}>
         {options.map((value) => {
           return (
-            <div key={`${value}`}>
+            <div key={`${value}`} style={{textAlign: 'center'}}>
               <Label name={name} value={value} />
               {template({...props, ...extraProps, [name]: value}, context)}
             </div>
