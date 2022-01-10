@@ -3,7 +3,7 @@
 @import (reference) 'antd/lib/avatar/style/index.less';
 @import (reference) '../../style/themes/default.less';
 
-.ant-avatar {
+.@{avatar-prefix-cls} {
   &-xs {
     font-size: @font-size-xs;
     width: 20px;
@@ -23,5 +23,15 @@
     width: 96px;
     height: 96px;
     line-height: 96px;
+  }
+
+  &-primary {
+    color: @btn-primary-color;
+    background-color: @btn-primary-bg;
+  }
+
+  &-secondary {
+    color: @btn-secondary-color;
+    background-color: @btn-secondary-bg;
   }
 }
