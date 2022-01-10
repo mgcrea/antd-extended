@@ -1,6 +1,6 @@
 import {ArrowRightOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
-import React, {FunctionComponent, HTMLProps, ReactNode, useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import React, {FunctionComponent, HTMLProps, ReactNode, useCallback, useMemo, useRef, useState} from 'react';
 import {classNames, useDebugEffect} from '../utils';
 import './style/time-slot-picker.less';
 import {TimePicker, TimePickerProps} from './TimePicker';

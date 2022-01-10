@@ -4,7 +4,7 @@ import {Avatar as AntDesignAvatar} from 'antd';
 import {AvatarProps as AntDesignAvatarProps} from 'antd/lib/avatar';
 import {AvatarSize} from 'antd/lib/avatar/SizeContext';
 import React, {FunctionComponent} from 'react';
-import {applySizeProps, SizeType} from '..';
+import {applySizeProps, SizeType} from './../utils';
 import './style/avatar.less';
 
 export type AvatarProps = Omit<AntDesignAvatarProps, 'size'> & {
