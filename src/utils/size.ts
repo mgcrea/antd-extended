@@ -26,7 +26,7 @@ export const applySizeProps = (prefix: string, {className, size}: SizeProps): An
   }
 };
 
-export const applySizeClassNames = (prefix: string, {className, size}: SizeProps): AntdSizeProps => {
+export const applySizeClassNames = (prefix: string, {className, size}: SizeProps): {className: string} => {
   switch (size) {
     case 'x-small':
       return {className: classNames(className, `${prefix}-xs`)};
