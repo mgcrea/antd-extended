@@ -42,7 +42,7 @@ npm install @mgcrea/antd-extended
 ```tsx
 import React from 'react';
 import {Button} from '@mgcrea/antd-extended';
-import '@mgcrea/antd-extended/lib/esm/index.css'; // or follow dynamic style import configuration
+import '@mgcrea/antd-extended/lib/esm/index.css'; // optional
 
 function App() {
   const {
