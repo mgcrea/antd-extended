@@ -40,6 +40,7 @@ npm install @mgcrea/antd-extended
 ```tsx
 import React from 'react';
 import {Button} from '@mgcrea/antd-extended';
+import '@mgcrea/antd-extended/lib/esm/index.css'; // or follow dynamic style import configuration
 
 function App() {
   const {
@@ -58,4 +59,62 @@ function App() {
     </div>
   );
 }
+```
+
+## Dynamic style import configuration
+
+Like the original `antd` package, `@mgcrea/antd-extended` ships with `.less` styles that you have to import in your app.
+
+Best way to achieve this is to configure your module bundler using the
+
+### Babel plugin
+
+Using [babel-plugin-import](https://github.com/umijs/babel-plugin-import):
+
+```js
+// babel.config.js
+plugins: [
+  ['import', {libraryName: 'antd', libraryDirectory: 'lib'}, 'antd'],
+  ['import', {libraryName: '@mgcrea/antd-extended', libraryDirectory: 'lib/esm', style: (name) => { return [`antd/es/${name}/style/index.less`, `@mgcrea/antd-extended/lib/esm/${name}/style/index.less`]; }}, '@mgcrea/antd-extended'],
+],
+```
+
+### Vite plugin
+
+Using [vitePluginImp](https://github.com/onebay/vite-plugin-imp):
+
+```js
+// vite.config.js
+plugins: [
+  vitePluginImp({
+    libList: [
+      {
+        libName: 'antd',
+        style: (name) => {
+          if (name === 'col' || name === 'row') {
+            return 'antd/es/grid/style/index.less';
+          }
+          if (name === 'table') {
+            return [
+              `antd/es/${name}/style/index.less`,
+              'antd/es/pagination/style/index.less',
+              'antd/es/dropdown/style/index.less',
+            ];
+          }
+          if (name === 'popconfirm') {
+            return [`antd/es/${name}/style/index.less`, 'antd/es/popover/style/index.less'];
+          }
+          return `antd/es/${name}/style/index.less`;
+        },
+      },
+      {
+        libName: '@mgcrea/antd-extended',
+        replaceOldImport: false,
+        style: (name) => {
+          return [`antd/es/${name}/style/index.less`, `@mgcrea/antd-extended/lib/esm/${name}/style/index.less`];
+        },
+      },
+    ],
+  }),
+],
 ```
