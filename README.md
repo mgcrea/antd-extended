@@ -1,3 +1,5 @@
+<!-- markdownlint-disable no-inline-html -->
+
 # antd-extended
 
 <p align="center">
@@ -63,9 +65,7 @@ function App() {
 
 ## Dynamic style import configuration
 
-Like the original `antd` package, `@mgcrea/antd-extended` ships with `.less` styles that you have to import in your app.
-
-Best way to achieve this is to configure your module bundler using the
+Like the original `antd` package, `@mgcrea/antd-extended` ships with `.less` styles that you may want to import in your app.
 
 ### Babel plugin
 
@@ -74,7 +74,6 @@ Using [babel-plugin-import](https://github.com/umijs/babel-plugin-import):
 ```js
 // babel.config.js
 plugins: [
-  ['import', {libraryName: 'antd', libraryDirectory: 'lib'}, 'antd'],
   ['import', {libraryName: '@mgcrea/antd-extended', libraryDirectory: 'lib/esm', style: (name) => { return [`antd/es/${name}/style/index.less`, `@mgcrea/antd-extended/lib/esm/${name}/style/index.less`]; }}, '@mgcrea/antd-extended'],
 ],
 ```
@@ -88,25 +87,6 @@ Using [vitePluginImp](https://github.com/onebay/vite-plugin-imp):
 plugins: [
   vitePluginImp({
     libList: [
-      {
-        libName: 'antd',
-        style: (name) => {
-          if (name === 'col' || name === 'row') {
-            return 'antd/es/grid/style/index.less';
-          }
-          if (name === 'table') {
-            return [
-              `antd/es/${name}/style/index.less`,
-              'antd/es/pagination/style/index.less',
-              'antd/es/dropdown/style/index.less',
-            ];
-          }
-          if (name === 'popconfirm') {
-            return [`antd/es/${name}/style/index.less`, 'antd/es/popover/style/index.less'];
-          }
-          return `antd/es/${name}/style/index.less`;
-        },
-      },
       {
         libName: '@mgcrea/antd-extended',
         replaceOldImport: false,
