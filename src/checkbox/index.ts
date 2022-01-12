@@ -1,8 +1,7 @@
-export * from './Checkbox';
+import {Checkbox as BaseCheckbox} from 'antd';
 export * from './CheckboxButton';
 export * from './CheckboxGroup';
 
-import {Checkbox as BaseCheckbox} from './Checkbox';
 import {CheckboxButton} from './CheckboxButton';
 import {CheckboxGroup} from './CheckboxGroup';
 export const Checkbox = Object.assign(BaseCheckbox, {
