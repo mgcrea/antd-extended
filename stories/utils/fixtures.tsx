@@ -17,7 +17,7 @@ export const Fixture = styled.img.withConfig({
 
 export function templateWithFixture<P>(Component: FunctionComponent<P>, fixtureSrc?: string): Story<P> {
   const StoryWithFixture: Story<P> = (args, context) => {
-    console.warn(context.globals);
+    // console.warn(context.globals);
     const {opacity = 0} = context.globals.fixture || {};
     return (
       <section>

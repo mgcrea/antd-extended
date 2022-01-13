@@ -21,7 +21,6 @@ export const Search: FunctionComponent<SearchProps> = ({
 }) => {
   const handleSearch = useCallback(
     (searchValue) => {
-      console.warn('handleSearch', searchValue);
       if (onSearch) {
         onSearch(searchValue);
       }

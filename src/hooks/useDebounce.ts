@@ -29,7 +29,6 @@ function debounce<T extends (...args: any[]) => any>(func: T, wait: number): T &
     {
       cancel: () => {
         if (timer) {
-          console.warn('cancel');
           clearTimeout(timer);
         }
       },
