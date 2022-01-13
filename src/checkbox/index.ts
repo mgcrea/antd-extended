@@ -7,4 +7,4 @@ import {CheckboxGroup} from './CheckboxGroup';
 export const Checkbox = Object.assign(AntDesignCheckbox, {
   Button: CheckboxButton,
   Group: CheckboxGroup,
-});
+}) as typeof AntDesignCheckbox & {Button: typeof CheckboxButton};
