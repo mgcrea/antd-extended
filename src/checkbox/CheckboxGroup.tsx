@@ -1,8 +1,7 @@
 // @docs https://ant.design/components/checkbox/
 // @source https://github.com/ant-design/ant-design/tree/master/components/checkbox
 
-import {Checkbox as AntDesignCheckbox} from 'antd';
-import {CheckboxGroupProps as AntDesignCheckboxGroupProps} from 'antd/lib/checkbox';
+import AntDesignCheckbox, {CheckboxGroupProps as AntDesignCheckboxGroupProps} from 'antd/lib/checkbox';
 import SizeContext from 'antd/lib/config-provider/SizeContext';
 import React, {FunctionComponent, useContext} from 'react';
 import {applySizeClassNames, classNames, SizeType} from './../utils';

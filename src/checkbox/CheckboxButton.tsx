@@ -3,7 +3,7 @@
 
 import React, {FunctionComponent} from 'react';
 import {classNames} from './../utils';
-import {Checkbox as AntDesignCheckbox, CheckboxProps} from 'antd';
+import AntDesignCheckbox, {CheckboxProps} from 'antd/lib/checkbox';
 import './style/checkbox-button.less';
 
 export type CheckboxButtonProps = CheckboxProps;
