@@ -3,11 +3,11 @@
 
 import React, {FunctionComponent} from 'react';
 import {classNames} from './../utils';
-import {Checkbox, CheckboxProps} from './Checkbox';
+import {Checkbox as AntDesignCheckbox, CheckboxProps} from 'antd';
 import './style/checkbox-button.less';
 
 export type CheckboxButtonProps = CheckboxProps;
 
 export const CheckboxButton: FunctionComponent<CheckboxButtonProps> = ({className, ...otherProps}) => {
-  return <Checkbox className={classNames(className, 'ant-checkbox-button-wrapper')} {...otherProps} />;
+  return <AntDesignCheckbox className={classNames(className, 'ant-checkbox-button-wrapper')} {...otherProps} />;
 };

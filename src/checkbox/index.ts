@@ -1,10 +1,10 @@
-import {Checkbox as BaseCheckbox} from 'antd';
+import {Checkbox as AntDesignCheckbox} from 'antd';
 export * from './CheckboxButton';
 export * from './CheckboxGroup';
 
 import {CheckboxButton} from './CheckboxButton';
 import {CheckboxGroup} from './CheckboxGroup';
-export const Checkbox = Object.assign(BaseCheckbox, {
+export const Checkbox = Object.assign(AntDesignCheckbox, {
   Button: CheckboxButton,
   Group: CheckboxGroup,
 });
