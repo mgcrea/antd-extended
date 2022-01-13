@@ -110,18 +110,21 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
     });
   }, []);
 
-  const canAddSlot = useMemo(
-    () =>
-      !values.length ||
-      !values.some((value) => {
-        if (value && value[1]) {
-          if (value[1].get('hour') === 23 && value[1].get('minute') === 59) {
-            return true;
-          }
-        }
-      }),
-    [values],
-  );
+  const canAddSlot = useMemo(() => {
+    if (!values.length) {
+      return true;
+    }
+    const endsAtMidnight = values.some(([_, to]) => {
+      return to && to.get('hour') === 23 && to.get('minute') >= 58;
+    });
+    const endsNextDay = values.some(([from, to]) => {
+      return from && to && to.isBefore(from);
+    });
+    if (endsAtMidnight || endsNextDay) {
+      return false;
+    }
+    return true;
+  }, [values]);
 
   return (
     <div style={style} className={classNames('ant-slot-list-picker', className)}>
