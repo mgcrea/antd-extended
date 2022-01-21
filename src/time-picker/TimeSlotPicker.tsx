@@ -1,7 +1,7 @@
 import {ArrowRightOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs';
 import React, {FunctionComponent, HTMLProps, ReactNode, useCallback, useMemo, useRef, useState} from 'react';
-import {classNames, useDebugEffect} from '../utils';
+import {classNames} from '../utils';
 import './style/time-slot-picker.less';
 import {TimePicker, TimePickerProps} from './TimePicker';
 
@@ -48,8 +48,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
     },
     [onChange],
   );
-
-  useDebugEffect({fromValue, toValue, onChange});
+  // useDebugEffect({fromValue, toValue, onChange});
 
   const doesOverflow = useMemo<boolean>(() => {
     if (!fromValue || !toValue) {
