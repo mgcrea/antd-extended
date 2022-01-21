@@ -49,7 +49,7 @@ export const TimePicker: FunctionComponent<TimePickerProps> = ({
       if (utc) {
         // @NOTE Keep existing date for utc-like values to allow overflowing
         const nextDate = value.year() === 1970 && value.month() === 0 ? value.date() : 1;
-        value = value.year(1970).month(0).date(nextDate).utc(true);
+        value = value.year(1970).month(0).date(nextDate).utc();
       }
       if (startOf) {
         value = value.startOf(startOf);

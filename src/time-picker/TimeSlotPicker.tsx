@@ -85,12 +85,16 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
     [allowOverflow, startOf, fromValue, handleChange],
   );
 
+  const fromIsBefore = useMemo(() => {
+    // Prevent isBefore D+1 selection (via isDisabledInside)
+    return isBefore && dayjs(isBefore).isAfter(dayjs(0).endOf('day')) ? undefined : isBefore;
+  }, [isBefore]);
   const toIsAfter = useMemo(() => {
-    if (fromValue && !allowOverflow) {
+    if (fromValue) {
       return isAfter ? dayjs.max(isAfter, fromValue) : fromValue;
     }
     return isAfter;
-  }, [allowOverflow, fromValue, isAfter]);
+  }, [fromValue, isAfter]);
 
   return (
     <div style={style} className={classNames('ant-slot-picker', className)}>
@@ -100,7 +104,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
         onChange={handleFromChange}
         value={fromValue}
         startOf={startOf}
-        isBefore={isBefore}
+        isBefore={fromIsBefore}
         isAfter={isAfter}
         {...otherProps}
       />

@@ -23,6 +23,8 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
   value: valueProp = [],
   maxSpread = 36e5 * 24,
   onChange,
+  isBefore: isBeforeProp,
+  isAfter: isAfterProp,
   ...otherProps
 }) => {
   const [values, setValues] = useState<TimeSlotListPickerValue>(valueProp);
@@ -64,14 +66,22 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
         soFar = to;
       }
       return soFar;
-    }, dayjs(0));
-    // console.log(`${index}.isAfter`, isAfter?.toISOString());
-    return isAfter;
+    }, dayjs.utc(0));
+    // console.log(`${index}.isAfter`, [isAfter, isAfter?.toISOString()]);
+    if (!isAfter) {
+      return isAfterProp;
+    }
+    isAfterProp && console.log(`${index}.isAfter *`, dayjs.min(isAfterProp, isAfter));
+    return isAfterProp ? dayjs.min(isAfterProp, isAfter) : isAfter;
   };
   const getIsBeforeForIndex = (_index: number) => {
     const isBefore = values[0] && values[0][0] ? dayjs(values[0][0]).add(maxSpread) : undefined;
-    // console.log(`${index}.isBefore`, isBefore?.toISOString());
-    return isBefore;
+    // console.log(`${_index}.isBefore`, isBefore, isBefore?.toISOString());
+    if (!isBefore) {
+      return isBeforeProp;
+    }
+    isBeforeProp && console.log(`${_index}.isAfter *`, dayjs.min(isBeforeProp, isBefore));
+    return isBeforeProp ? dayjs.max(isBeforeProp, isBefore) : isBefore;
   };
 
   const getOnDeleteClickForIndex = useCallback(
