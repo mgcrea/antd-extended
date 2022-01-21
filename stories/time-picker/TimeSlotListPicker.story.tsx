@@ -7,7 +7,7 @@ import {TimeSlotListPicker} from '../../src/time-picker';
 // import {TimeSlotListPicker} from 'antd';
 import {
   dateRangeArgValueExtractor,
-  dateRangeLabelExtractor,
+  dateRangeArrayLabelExtractor,
   declineTemplate,
   sizeTemplate,
   storybookSizeArgTypes,
@@ -50,7 +50,7 @@ const DefaultTemplate: ComponentStory<typeof TimeSlotListPicker> = withLocalStat
   {
     // argValueInjector: (value: number) => [dayjs(value), dayjs(value)],
     argValueExtractor: dateRangeArgValueExtractor,
-    labelExtractor: dateRangeLabelExtractor,
+    labelExtractor: dateRangeArrayLabelExtractor,
     trigger: 'onChange',
   },
 );

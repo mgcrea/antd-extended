@@ -57,34 +57,22 @@ export const TimeSlotListPicker: FunctionComponent<TimeSlotListPickerProps> = ({
     [handleChangeForIndex, cachedOnSelectHandlers],
   );
   // @TODO handle spread (24h max), reduce min?
-  const {current: cachedIsAfterValues} = useRef<Map<number, TimeSlotPickerProps['isAfter']>>(new Map());
-  const getIsAfterForIndex = useCallback(
-    (index: number) => {
-      if (!cachedIsAfterValues.has(index)) {
-        // jlog({values: values.slice(0, index + 1)});
-        const isAfter = values.slice(0, index + 1).reduce((soFar, [_from, to]) => {
-          if (to && to.isAfter(soFar)) {
-            soFar = to;
-          }
-          return soFar;
-        }, dayjs(0));
-        cachedIsAfterValues.set(index, isAfter);
+  const getIsAfterForIndex = (index: number) => {
+    // jlog({values: values.slice(0, index + 1)});
+    const isAfter = values.slice(0, index + 1).reduce((soFar, [_from, to]) => {
+      if (to && to.isAfter(soFar)) {
+        soFar = to;
       }
-      return cachedIsAfterValues.get(index);
-    },
-    [values, cachedIsAfterValues],
-  );
-  const {current: cachedIsBeforeValues} = useRef<Map<number, TimeSlotPickerProps['isBefore']>>(new Map());
-  const getIsBeforeForIndex = useCallback(
-    (index: number) => {
-      if (!cachedIsBeforeValues.has(index)) {
-        const isBefore = values[0] && values[0][0] ? dayjs(values[0][0]).add(maxSpread) : undefined;
-        cachedIsBeforeValues.set(index, isBefore);
-      }
-      return cachedIsBeforeValues.get(index);
-    },
-    [values, cachedIsBeforeValues, maxSpread],
-  );
+      return soFar;
+    }, dayjs(0));
+    // console.log(`${index}.isAfter`, isAfter?.toISOString());
+    return isAfter;
+  };
+  const getIsBeforeForIndex = (_index: number) => {
+    const isBefore = values[0] && values[0][0] ? dayjs(values[0][0]).add(maxSpread) : undefined;
+    // console.log(`${index}.isBefore`, isBefore?.toISOString());
+    return isBefore;
+  };
 
   const getOnDeleteClickForIndex = useCallback(
     (index: number) => (): void => {
