@@ -19,6 +19,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup pnpm 🔧
         uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Setup node 🔧
         uses: actions/setup-node@v2
         with:
@@ -46,6 +48,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup pnpm 🔧
         uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Setup node 🔧
         uses: actions/setup-node@v2
         with:
@@ -64,6 +68,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup pnpm 🔧
         uses: pnpm/action-setup@v2
+        with:
+          version: latest
       - name: Setup 🔧
         uses: actions/setup-node@v2
         with:
