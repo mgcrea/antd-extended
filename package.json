@@ -5,6 +5,13 @@
   "main": "./lib/umd/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/esm/index.d.ts",
+      "module": "./lib/esm/index.js",
+      "require": "./lib/umd/index.js"
+    }
+  },
   "repository": "github:mgcrea/antd-extended",
   "author": "Olivier Louvignes <olivier@mgcrea.io>",
   "scripts": {
