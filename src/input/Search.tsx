@@ -1,6 +1,6 @@
 // @docs https://ant.design/components/input/
 
-import AntDesignSearch, {SearchProps as AntDesignSearchProps} from 'antd/lib/input/Search';
+import AntDesignSearch, {SearchProps as AntDesignSearchProps} from 'antd/es/input/Search';
 import React, {FunctionComponent, useCallback} from 'react';
 import {useDebounce} from './../hooks';
 import {applySizeProps, SizeType} from './../utils';
@@ -20,7 +20,7 @@ export const Search: FunctionComponent<SearchProps> = ({
   ...otherProps
 }) => {
   const handleSearch = useCallback(
-    (searchValue) => {
+    (searchValue: string) => {
       if (onSearch) {
         onSearch(searchValue);
       }

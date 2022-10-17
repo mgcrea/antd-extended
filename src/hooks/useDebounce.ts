@@ -5,11 +5,11 @@ export function useDebounce<T extends (...args: any[]) => any>(callback: T, wait
   const debounced = useMemo(() => debounce(callback, wait), [callback, wait]);
   useEffect(() => {
     return () => {
-      debounced.cancel();
+      debounced.cancel(undefined);
     };
   }, [debounced]);
   useEffect(() => {
-    debounced.cancel();
+    debounced.cancel(undefined);
   }, [debounced, callback, wait]);
   return debounced;
 }
@@ -33,5 +33,5 @@ function debounce<T extends (...args: any[]) => any>(func: T, wait: number): T &
         }
       },
     },
-  ) as T & {cancel: typeof clearTimeout};
+  ) as unknown as T & {cancel: typeof clearTimeout};
 }

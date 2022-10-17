@@ -1,8 +1,8 @@
 // @docs https://ant.design/components/time-picker
 // @source https://github.com/ant-design/ant-design/tree/master/components/time-picker
 
-import 'antd/lib/time-picker/style/index.less';
-import dayjs, {OpUnitType} from 'dayjs';
+import 'antd/es/time-picker/style/index.less';
+import dayjs, {ManipulateType} from 'dayjs';
 import React, {FunctionComponent, useCallback, useMemo, useRef} from 'react';
 import {DatePicker, PickerTimeProps} from './../date-picker/Picker';
 import {applySizeProps, integerArraySuite, SizeType} from './../utils';
@@ -15,7 +15,7 @@ export type TimePickerValue = Defined<PickerTimeProps['value']>;
 
 export type TimePickerProps = Omit<PickerTimeProps, 'picker' | 'size' | 'onSelect'> & {
   size?: SizeType;
-  startOf?: OpUnitType;
+  startOf?: ManipulateType;
   onSelect?: (value: TimePickerValue) => void;
   isBefore?: TimePickerValue;
   isAfter?: TimePickerValue;

@@ -5,7 +5,7 @@ import path from 'path';
 import copy from 'rollup-plugin-copy';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
 import postcss from 'rollup-plugin-postcss';
-import packageJson from './package.json';
+import packageJson from './package.json' assert {type: 'json'};
 
 const sourcemap = true;
 

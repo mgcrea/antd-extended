@@ -1,7 +1,7 @@
 // @source https://github.com/ant-design/ant-design/blob/master/components/select
 
 import {Select as AntDesignSelect} from 'antd';
-import type {OptionProps as AntDesignSelectOptionProps} from 'antd/lib/select';
+import type {OptionProps as AntDesignSelectOptionProps} from 'antd/es/select';
 import React, {FunctionComponent} from 'react';
 
 export const {Option: AntDesignSelectOption} = AntDesignSelect;

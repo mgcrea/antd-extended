@@ -2,7 +2,7 @@
 // @source https://github.com/ant-design/ant-design/blob/master/components/select
 
 import {Select as AntDesignSelect} from 'antd';
-import type {SelectProps as AntDesignSelectProps, SelectValue} from 'antd/lib/select';
+import type {SelectProps as AntDesignSelectProps, SelectValue} from 'antd/es/select';
 import React, {FunctionComponent} from 'react';
 import {applySizeProps, SizeType} from './../utils';
 import './style/select.less';

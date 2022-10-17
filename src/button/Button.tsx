@@ -1,6 +1,6 @@
 // @docs https://ant.design/components/button/
 
-import AntDesignButton, {ButtonProps as AntDesignButtonProps} from 'antd/lib/button';
+import AntDesignButton, {ButtonProps as AntDesignButtonProps} from 'antd/es/button';
 import React, {FunctionComponent} from 'react';
 import {applySizeProps, SizeType, classNames} from './../utils';
 import './style/button.less';

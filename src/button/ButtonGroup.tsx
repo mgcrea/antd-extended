@@ -1,7 +1,7 @@
 // @source https://github.com/ant-design/ant-design/tree/master/components/radio
 
 import {Button as AntDesignButton} from 'antd';
-import {ButtonGroupProps as AntDesignButtonGroupProps} from 'antd/lib/button';
+import {ButtonGroupProps as AntDesignButtonGroupProps} from 'antd/es/button';
 import React, {FunctionComponent} from 'react';
 
 const {Group: AntDesignGroup} = AntDesignButton;

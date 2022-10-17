@@ -1,2 +1,2 @@
-import Checkbox, {CheckboxProps} from 'antd/lib/checkbox';
+import Checkbox, {CheckboxProps} from 'antd/es/checkbox';
 export {Checkbox, CheckboxProps};

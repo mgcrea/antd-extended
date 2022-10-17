@@ -1,8 +1,8 @@
 // @docs https://ant.design/components/input/
 
-import SizeContext from 'antd/lib/config-provider/SizeContext';
-// import {ConfigConsumer} from 'antd/lib/config-provider';
-import AntDesignTextArea, {TextAreaProps as AntDesignTextAreaProps} from 'antd/lib/input/TextArea';
+import SizeContext from 'antd/es/config-provider/SizeContext';
+// import {ConfigConsumer} from 'antd/es/config-provider';
+import AntDesignTextArea, {TextAreaProps as AntDesignTextAreaProps} from 'antd/es/input/TextArea';
 import React, {FunctionComponent, useContext} from 'react';
 import {applySizeClassNames, SizeType} from './../utils';
 import './style/input.less';

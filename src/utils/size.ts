@@ -1,4 +1,4 @@
-import {SizeType as AntdSizeType} from 'antd/lib/config-provider/SizeContext';
+import {SizeType as AntdSizeType} from 'antd/es/config-provider/SizeContext';
 import {classNames} from './classNames';
 
 export type SizeType = AntdSizeType | 'medium' | 'x-small' | 'x-large' | 'xx-large';

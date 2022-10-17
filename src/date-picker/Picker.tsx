@@ -4,11 +4,11 @@ import generatePicker, {
   PickerTimeProps as BasePickerTimeProps,
   RangePickerProps as BaseRangePickerProps,
   RangePickerTimeProps as BaseRangePickerTimeProps,
-} from 'antd/lib/date-picker/generatePicker';
+} from 'antd/es/date-picker/generatePicker';
 import dayjs, {Dayjs} from 'dayjs';
-import dayjsGenerateConfig from 'rc-picker/lib/generate/dayjs';
+import dayjsGenerateConfig from 'rc-picker/es/generate/dayjs';
 import './config/dayjs';
-export type {EventValue} from 'rc-picker/lib/interface';
+export type {EventValue} from 'rc-picker/es/interface';
 
 // @NOTE workaround https://github.com/react-component/picker/issues/66
 const localeMap: Record<string, string> = {

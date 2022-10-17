@@ -1,8 +1,8 @@
 // @source https://github.com/ant-design/ant-design/tree/master/components/avatar
 
 import {Avatar as AntDesignAvatar} from 'antd';
-import {AvatarProps as AntDesignAvatarProps} from 'antd/lib/avatar';
-import {AvatarSize} from 'antd/lib/avatar/SizeContext';
+import {AvatarProps as AntDesignAvatarProps} from 'antd/es/avatar';
+import {AvatarSize} from 'antd/es/avatar/SizeContext';
 import React, {FunctionComponent} from 'react';
 import {applySizeClassNames, classNames, SizeType} from './../utils';
 import './style/avatar.less';

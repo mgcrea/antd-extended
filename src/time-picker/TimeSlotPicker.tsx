@@ -40,7 +40,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
   // const values = useMemo<TimeSlotPickerValue>(() => [fromValue, toValue], [fromValue, toValue]);
 
   const handleChange = useCallback(
-    ([fromValue, toValue]) => {
+    ([fromValue, toValue]: TimeSlotPickerValue) => {
       const hasInvalidValues = [fromValue, toValue].some((value) => !(value && value.isValid()));
       if (onChange && !hasInvalidValues) {
         onChange([fromValue, toValue]);
@@ -58,7 +58,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
   }, [fromValue, toValue]);
 
   const handleFromChange = useCallback(
-    (fromValue) => {
+    (fromValue: TimePickerProps['value']) => {
       isDirty.current = true;
       // logDate({fromValue});
       setFromValue(fromValue);
@@ -68,7 +68,7 @@ export const TimeSlotPicker: FunctionComponent<TimeSlotPickerProps> = ({
   );
 
   const handleToChange = useCallback(
-    (toValue) => {
+    (toValue: TimePickerProps['value']) => {
       isDirty.current = true;
       const willOverflow = fromValue && toValue && toValue.toDate().getTime() <= fromValue.toDate().getTime();
       // @NOTE ux vs disabled?

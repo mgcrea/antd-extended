@@ -1,7 +1,7 @@
 // @docs https://ant.design/components/input/
 
 import {Input} from 'antd';
-import {PasswordProps as AntDesignPasswordProps} from 'antd/lib/input';
+import {PasswordProps as AntDesignPasswordProps} from 'antd/es/input';
 import React, {FunctionComponent} from 'react';
 import {applySizeClassNames, SizeType} from './../utils';
 import './style/input.less';
