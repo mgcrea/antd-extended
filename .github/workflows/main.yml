@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         node: ['lts/*']
-    name: Test on node@v${{ matrix.node }}
+    name: Test on node@${{ matrix.node }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -42,7 +42,7 @@ jobs:
     strategy:
       matrix:
         node: ['lts/*']
-    name: Build on node@v${{ matrix.node }}
+    name: Build on node@${{ matrix.node }}
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
